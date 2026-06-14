@@ -1260,6 +1260,49 @@ z-index:5;
 
 }
 
+.surpresa-popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    z-index:999999;
+    justify-content:center;
+    align-items:center;
+}
+
+.surpresa-box{
+    background:#181818;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    max-width:400px;
+    width:90%;
+}
+
+.surpresa-box h2{
+    margin-bottom:10px;
+}
+
+.surpresa-box p{
+    color:#bbb;
+    margin-bottom:20px;
+}
+
+.surpresa-box button{
+    padding:10px 20px;
+    margin:5px;
+    cursor:pointer;
+}
+
+.surpresa-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
 </style>
 </head>
 <body>
@@ -3298,7 +3341,108 @@ liberarSite();
 
 }
 
+function escolherFilmeAleatorio(){
+
+    const todos = [
+    ...filmesData,
+    ...seriesData,
+    ...animesData
+];
+
+if(!todos.length){
+    return;
+}
+
+const sorteado =
+todos[Math.floor(Math.random() * todos.length)];
+
+let tipo = "filme";
+
+if(seriesData.some(x => x.id === sorteado.id)){
+    tipo = "serie";
+}
+
+if(animesData.some(x => x.id === sorteado.id)){
+    tipo = "anime";
+}
+
+abrirDetalhes(sorteado, tipo);
+}
+
+setTimeout(() => {
+
+const popup =
+document.getElementById("surpresaPopup");
+
+popup.style.display = "flex";
+
+}, 300000);
+
 </script>
+
+<div id="surpresaPopup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+z-index:999999;
+justify-content:center;
+align-items:center;
+">
+
+    <div style="
+    background:#181818;
+    padding:30px;
+    border-radius:16px;
+    max-width:400px;
+    width:90%;
+    text-align:center;
+    ">
+
+        <h2>🍿 Ainda procurando?</h2>
+
+        <p style="margin:15px 0;color:#bbb;">
+            Já faz um tempo que você está navegando.
+            Que tal uma sugestão aleatória?
+        </p>
+
+        <div class="surpresa-buttons">
+
+            <button id="btnSurpresa" class="btn-play">
+                🎲 Me Surpreenda
+            </button>
+        
+            <button id="fecharSurpresa" class="btn-info">
+                Continuar procurando
+            </button>
+        
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.getElementById("btnSurpresa")
+    .addEventListener("click", () => {
+    
+        document.getElementById("surpresaPopup")
+        .style.display = "none";
+    
+        escolherFilmeAleatorio();
+    
+    });
+    
+    document.getElementById("fecharSurpresa")
+    .addEventListener("click", () => {
+    
+        document.getElementById("surpresaPopup")
+        .style.display = "none";
+    
+    });
+    
+    </script>
 
 </body>
 </html>
