@@ -664,6 +664,147 @@ nav{
     font-size:14px;
 }
 
+/* ===== EPISÓDIOS ===== */
+.episodes-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.season-select-wrap{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.season-select-wrap label{
+    font-size:14px;
+    color:var(--muted-2);
+}
+
+.season-select-wrap select{
+    background:var(--card-2);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    padding:12px 14px;
+    min-width:180px;
+    outline:none;
+}
+
+.episodes-progress{
+    font-size:14px;
+    color:var(--muted);
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:999px;
+    padding:10px 14px;
+}
+
+.episodes-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.episode-card{
+    background:var(--card-2);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:16px;
+    padding:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    align-items:flex-start;
+    transition:.25s;
+}
+
+.episode-card:hover{
+    transform:translateY(-2px);
+}
+
+.episode-left{
+    flex:1;
+    min-width:0;
+}
+
+.episode-title{
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.episode-meta{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+}
+
+.episode-desc{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.55;
+}
+
+.episode-right{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-width:140px;
+}
+
+.episode-watch-btn{
+    border:none;
+    border-radius:12px;
+    padding:12px 14px;
+    font-weight:700;
+    cursor:pointer;
+    background:#fff;
+    color:#000;
+    transition:.25s;
+}
+
+.episode-watch-btn:hover{
+    transform:translateY(-1px);
+}
+
+.episode-check-btn{
+    border:none;
+    border-radius:12px;
+    padding:12px 14px;
+    font-weight:700;
+    cursor:pointer;
+    background:rgba(255,255,255,.1);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.25s;
+}
+
+.episode-check-btn.active{
+    background:rgba(41,209,125,.18);
+    border-color:rgba(41,209,125,.35);
+}
+
+@media(max-width:768px){
+    .episode-card{
+        flex-direction:column;
+    }
+
+    .episode-right{
+        width:100%;
+        min-width:0;
+    }
+
+    .episode-watch-btn,
+    .episode-check-btn{
+        width:100%;
+    }
+}
+
 /* ===== EMPTY / LOADING ===== */
 .empty-state{
     display:flex;
@@ -763,67 +904,449 @@ nav{
     transform:translateY(0);
 }
 
-/* ===== MOBILE ===== */
-@media(max-width:1000px){
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1100px){
     .details-grid{
         grid-template-columns:1fr;
     }
 
     .details-title{
-        font-size:46px;
+        font-size:44px;
     }
 }
 
-@media(max-width:900px){
+@media (max-width: 900px){
     .hero h1{
-        font-size:54px;
+        font-size:50px;
+    }
+
+    .hero p{
+        max-width:720px;
     }
 }
 
-@media(max-width:768px){
-    .nav-inner{
-        padding:12px 16px;
-        flex-wrap:wrap;
-        align-items:flex-start;
+@media (max-width: 768px){
+    /* NAV */
+    nav{
+        backdrop-filter:blur(14px);
     }
 
-    .menu{
-        display:none;
+    .nav-inner{
+        min-height:auto;
+        padding:12px 14px;
+        flex-wrap:wrap;
+        align-items:center;
+        gap:12px;
+    }
+
+    .logo{
+        font-size:24px;
+        flex:0 0 auto;
     }
 
     .right-tools{
+        order:3;
         width:100%;
     }
 
     .search-box{
         width:100%;
         min-width:0;
+        padding:11px 14px;
     }
 
+    /* menu não some: vira faixa horizontal rolável */
+    .menu{
+        order:2;
+        width:100%;
+        display:flex;
+        gap:10px;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding-bottom:4px;
+        scrollbar-width:none;
+        -ms-overflow-style:none;
+    }
+
+    .menu::-webkit-scrollbar{
+        display:none;
+    }
+
+    .menu a{
+        flex:0 0 auto;
+        padding:9px 14px;
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:999px;
+        background:rgba(255,255,255,.05);
+        font-size:14px;
+        white-space:nowrap;
+    }
+
+    /* HERO */
     .hero{
-        min-height:88vh;
-        padding:120px 20px 50px;
+        min-height:78vh;
+        padding:150px 16px 28px;
         align-items:flex-end;
     }
 
+    .hero-content{
+        max-width:100%;
+    }
+
     .hero h1{
-        font-size:42px;
+        font-size:34px;
+        line-height:1.05;
+        margin-bottom:10px;
     }
 
     .hero p{
-        font-size:16px;
+        font-size:14px;
+        line-height:1.55;
+        max-width:100%;
+        margin-bottom:16px;
+        display:-webkit-box;
+        -webkit-line-clamp:4;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
     }
 
+    .hero-badges{
+        gap:8px;
+        flex-wrap:wrap;
+        margin-bottom:16px;
+    }
+
+    .hero-actions{
+        width:100%;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .hero-actions .btn{
+        flex:1 1 calc(50% - 5px);
+        min-width:0;
+        justify-content:center;
+        padding:12px 14px;
+        font-size:14px;
+    }
+
+    /* GERAL */
+    .page-wrap,
     .section,
     .search-page,
     .details-bottom{
-        padding-left:20px;
-        padding-right:20px;
+        padding-left:16px !important;
+        padding-right:16px !important;
+    }
+
+    .section{
+        margin-top:26px;
+    }
+
+    .section-header{
+        gap:8px;
+        margin-bottom:14px;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .section-header h2{
+        font-size:22px;
+    }
+
+    .section-sub{
+        font-size:13px;
+    }
+
+    /* CARROSSEL */
+    .carousel{
+        gap:12px;
+        padding-bottom:6px;
+        scroll-snap-type:x proximity;
     }
 
     .card{
-        min-width:250px;
-        height:160px;
+        min-width:220px;
+        width:220px;
+        height:138px;
+        border-radius:16px;
+        scroll-snap-align:start;
+    }
+
+    .card-content{
+        padding:12px;
+    }
+
+    .card-title{
+        font-size:14px;
+        -webkit-line-clamp:2;
+    }
+
+    .card-meta{
+        gap:6px;
+    }
+
+    .pill{
+        font-size:11px;
+        padding:5px 8px;
+    }
+
+    .card-actions{
+        top:10px;
+        right:10px;
+    }
+
+    /* TOP 10 */
+    .top10-card{
+        min-width:240px;
+        width:240px;
+        height:150px;
+    }
+
+    .top10-number{
+        font-size:44px;
+        left:10px;
+        bottom:8px;
+    }
+
+    /* GRID DA BUSCA E CATEGORIAS */
+    .grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+        gap:14px;
+    }
+
+    .search-card{
+        border-radius:16px;
+    }
+
+    .search-card img{
+        height:220px;
+    }
+
+    .search-content{
+        padding:12px;
+    }
+
+    .search-title{
+        font-size:15px;
+        line-height:1.35;
+    }
+
+    .search-meta{
+        gap:6px;
+        font-size:12px;
+        flex-wrap:wrap;
+    }
+
+    .search-actions{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .search-actions .btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    /* TELA DE BUSCA / CATEGORIA */
+    .search-page,
+    .category-page{
+        padding-top:110px;
+        padding-bottom:40px;
+    }
+
+    .search-header{
+        gap:12px;
+        margin-bottom:20px;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .search-title-wrap h2{
+        font-size:24px;
+        line-height:1.15;
+    }
+
+    .search-title-wrap p{
+        font-size:14px;
+    }
+
+    /* DETALHES */
+    .details-hero{
+        min-height:auto;
+        padding:115px 16px 26px;
+    }
+
+    .details-title{
+        font-size:30px;
+        line-height:1.08;
+        margin-bottom:10px;
+    }
+
+    .details-desc{
+        font-size:14px;
+        line-height:1.6;
+        max-width:100%;
+    }
+
+    .details-meta{
+        gap:8px;
+        flex-wrap:wrap;
+        margin:14px 0 18px;
+    }
+
+    .details-actions{
+        width:100%;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .details-actions .btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .details-bottom{
+        padding-top:22px;
+        padding-bottom:36px;
+    }
+
+    .details-grid{
+        gap:20px;
+    }
+
+    .details-left,
+    .details-right{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .details-left h3,
+    .details-right h3{
+        font-size:20px;
+    }
+
+    .details-overview{
+        font-size:14px;
+        line-height:1.7;
+    }
+
+    /* TEMPORADAS / EPISÓDIOS */
+    .season-select{
+        width:100%;
+        min-width:0;
+    }
+
+    .episode-card{
+        padding:14px;
+        border-radius:14px;
+    }
+
+    .episode-top{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .episode-title{
+        font-size:15px;
+    }
+
+    .episode-overview{
+        font-size:13px;
+        line-height:1.55;
+    }
+
+    .episode-actions{
+        width:100%;
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .episode-actions .btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    /* PLAYER / TRAILER */
+    .modal{
+        padding:12px;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .modal-content{
+        width:100%;
+        max-width:100%;
+        border-radius:18px;
+        padding:14px;
+    }
+
+    .modal-title{
+        font-size:15px;
+        margin-bottom:10px;
+        padding-right:36px;
+    }
+
+    .close{
+        top:10px;
+        right:12px;
+        font-size:28px;
+    }
+
+    #movieFrame,
+    .details-trailer-box iframe{
+        width:100%;
+        aspect-ratio:16 / 9;
+        height:auto;
+        border-radius:14px;
+    }
+
+    .details-trailer-box{
+        min-height:auto;
+    }
+
+    /* TOAST */
+    .toast{
+        left:16px;
+        right:16px;
+        bottom:16px;
+        transform:none;
+        width:auto;
+        max-width:none;
+        text-align:center;
+    }
+}
+
+@media (max-width: 560px){
+    .hero{
+        min-height:72vh;
+        padding-top:145px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .hero p{
+        font-size:13px;
+        -webkit-line-clamp:3;
+    }
+
+    .hero-actions .btn{
+        flex:1 1 100%;
+    }
+
+    .card{
+        min-width:190px;
+        width:190px;
+        height:124px;
+    }
+
+    .top10-card{
+        min-width:210px;
+        width:210px;
+        height:138px;
     }
 
     .grid{
@@ -831,35 +1354,71 @@ nav{
     }
 
     .search-card img{
-        height:210px;
-    }
-
-    .search-title-wrap h2{
-        font-size:24px;
-    }
-
-    .details-hero{
-        min-height:82vh;
-        padding:110px 20px 40px;
+        height:230px;
     }
 
     .details-title{
-        font-size:34px;
+        font-size:26px;
     }
 
-    .details-desc{
-        font-size:15px;
+    .details-left,
+    .details-right{
+        padding:16px;
+    }
+
+    .section-header h2{
+        font-size:20px;
+    }
+
+    .back-btn{
+        width:100%;
+        justify-content:center;
+    }
+}
+
+@media (max-width: 380px){
+    .logo{
+        font-size:21px;
+    }
+
+    .hero{
+        padding-top:138px;
+    }
+
+    .hero h1{
+        font-size:24px;
+    }
+
+    .card{
+        min-width:175px;
+        width:175px;
+        height:116px;
     }
 
     .top10-card{
-        min-width:280px;
-        height:180px;
+        min-width:190px;
+        width:190px;
+        height:126px;
     }
 
-    .top10-number{
-        font-size:52px;
+    .menu a{
+        font-size:13px;
+        padding:8px 12px;
+    }
+
+    .section-header h2{
+        font-size:18px;
+    }
+
+    .details-title{
+        font-size:23px;
+    }
+
+    .search-title-wrap h2{
+        font-size:21px;
     }
 }
+
 </style>
 </head>
 <body>
@@ -870,12 +1429,11 @@ nav{
         <div class="logo" id="logoBtn">POLY TV+</div>
 
         <div class="menu">
-            <a href="#inicio" class="menu-link">Início</a>
-            <a href="#top10Sec" class="menu-link">Top 10</a>
-            <a href="#filmesSec" class="menu-link">Filmes</a>
-            <a href="#seriesSec" class="menu-link">Séries</a>
-            <a href="#animacoesSec" class="menu-link">Animações</a>
-            <a href="#minhaListaSec" class="menu-link">Minha Lista</a>
+            <a href="#" class="menu-link" data-page="home">Início</a>
+            <a href="#" class="menu-link" data-category="movies">Filmes</a>
+            <a href="#" class="menu-link" data-category="series">Séries</a>
+            <a href="#" class="menu-link" data-category="animations">Animações</a>
+            <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
         </div>
 
         <div class="right-tools">
@@ -900,6 +1458,22 @@ nav{
         </div>
 
         <div id="searchResults"></div>
+    </div>
+</section>
+
+<!-- TELA DE CATEGORIA -->
+<section class="search-page hidden" id="categoryPage">
+    <div class="page-wrap">
+        <div class="search-header">
+            <button class="back-btn" id="backCategoryBtn">← Voltar</button>
+
+            <div class="search-title-wrap">
+                <h2 id="categoryPageTitle">Categoria</h2>
+                <p id="categorySubtitle">Explore os títulos desta categoria</p>
+            </div>
+        </div>
+
+        <div id="categoryResults"></div>
     </div>
 </section>
 
@@ -928,15 +1502,35 @@ nav{
     <div class="details-bottom">
         <div class="page-wrap">
             <div class="details-grid">
-                <div class="panel">
-                    <h3>Sinopse</h3>
-                    <p id="detailsOverviewFull">Carregando...</p>
+                <div class="panel" id="detailsLeftPanel">
+                    <h3 id="detailsLeftTitle">Sinopse</h3>
+            
+                    <!-- CONTEÚDO DE FILME -->
+                    <div id="movieDetailsBox">
+                        <p id="detailsOverviewFull">Carregando...</p>
+                    </div>
+            
+                    <!-- CONTEÚDO DE SÉRIE -->
+                    <div id="seriesEpisodesBox" class="hidden">
+                        <div class="episodes-topbar">
+                            <div class="season-select-wrap">
+                                <label for="seasonSelect">Temporada</label>
+                                <select id="seasonSelect"></select>
+                            </div>
+            
+                            <div class="episodes-progress" id="episodesProgress">
+                                0/0 assistidos
+                            </div>
+                        </div>
+            
+                        <div id="episodesList"></div>
+                    </div>
                 </div>
-
+            
                 <div class="panel">
                     <h3>Trailer</h3>
                     <p class="small-info">Se houver trailer disponível, ele aparecerá abaixo.</p>
-
+            
                     <div class="trailer-box" id="detailsTrailerBox">
                         <div class="empty-state" style="padding:20px;height:100%;">
                             <p>Carregando trailer...</p>
@@ -973,6 +1567,26 @@ nav{
                     <button class="btn btn-secondary" id="heroListBtn">+ Minha Lista</button>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="section" id="continuarSec">
+        <div class="page-wrap">
+            <div class="section-header">
+                <h2>▶ Continuar Assistindo</h2>
+                <span class="section-sub">Retome de onde você parou</span>
+            </div>
+            <div class="carousel" id="continuarAssistindo"></div>
+        </div>
+    </section>
+
+    <section class="section" id="minhaListaSec">
+        <div class="page-wrap">
+            <div class="section-header">
+                <h2>❤️ Minha Lista</h2>
+                <span class="section-sub">Os títulos que você salvou</span>
+            </div>
+            <div class="carousel" id="minhaLista"></div>
         </div>
     </section>
 
@@ -1015,16 +1629,6 @@ nav{
             <div class="carousel" id="animacoes"></div>
         </div>
     </section>
-
-    <section class="section" id="minhaListaSec">
-        <div class="page-wrap">
-            <div class="section-header">
-                <h2>❤️ Minha Lista</h2>
-                <span class="section-sub">Os títulos que você salvou</span>
-            </div>
-            <div class="carousel" id="minhaLista"></div>
-        </div>
-    </section>
 </div>
 
 <!-- MODAL PLAYER / TRAILER -->
@@ -1051,6 +1655,12 @@ const IMG_ORIGINAL = "https://image.tmdb.org/t/p/original";
 /* =========================
    ELEMENTOS
 ========================= */
+const detailsLeftTitle = document.getElementById("detailsLeftTitle");
+const movieDetailsBox = document.getElementById("movieDetailsBox");
+const seriesEpisodesBox = document.getElementById("seriesEpisodesBox");
+const seasonSelect = document.getElementById("seasonSelect");
+const episodesList = document.getElementById("episodesList");
+const episodesProgress = document.getElementById("episodesProgress");
 const player = document.getElementById("player");
 const movieFrame = document.getElementById("movieFrame");
 const modalTitle = document.getElementById("modalTitle");
@@ -1058,6 +1668,12 @@ const modalTitle = document.getElementById("modalTitle");
 const homeContent = document.getElementById("homeContent");
 const searchPage = document.getElementById("searchPage");
 const detailsPage = document.getElementById("detailsPage");
+
+const categoryPage = document.getElementById("categoryPage");
+const categoryResults = document.getElementById("categoryResults");
+const categoryPageTitle = document.getElementById("categoryPageTitle");
+const categorySubtitle = document.getElementById("categorySubtitle");
+const backCategoryBtn = document.getElementById("backCategoryBtn");
 
 const searchResults = document.getElementById("searchResults");
 const searchPageTitle = document.getElementById("searchPageTitle");
@@ -1072,7 +1688,13 @@ const logoBtn = document.getElementById("logoBtn");
 let heroItem = null;
 let currentDetailsItem = null;
 let currentPage = "home";
+let previousPageBeforeDetails = "home"; // <- NOVO
 let searchTimer;
+
+let currentCategory = null;
+let currentCategoryPage = 1;
+let isCategoryLoading = false;
+let hasMoreCategoryItems = true;
 
 /* =========================
    UTIL
@@ -1124,6 +1746,7 @@ function mostrarHome(){
     homeContent.classList.remove("hidden");
     searchPage.classList.add("hidden");
     detailsPage.classList.add("hidden");
+    categoryPage.classList.add("hidden");
     window.scrollTo({ top:0, behavior:"smooth" });
 }
 
@@ -1131,7 +1754,17 @@ function abrirTelaBusca(){
     currentPage = "search";
     homeContent.classList.add("hidden");
     detailsPage.classList.add("hidden");
+    categoryPage.classList.add("hidden");
     searchPage.classList.remove("hidden");
+    window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+function abrirTelaCategoria(){
+    currentPage = "category";
+    homeContent.classList.add("hidden");
+    searchPage.classList.add("hidden");
+    detailsPage.classList.add("hidden");
+    categoryPage.classList.remove("hidden");
     window.scrollTo({ top:0, behavior:"smooth" });
 }
 
@@ -1142,10 +1775,22 @@ function voltarParaHome(){
 }
 
 function voltarDaTelaDetalhes(){
-    if(currentPage === "search"){
+    detailsPage.classList.add("hidden");
+
+    if(previousPageBeforeDetails === "search"){
+        currentPage = "search";
         homeContent.classList.add("hidden");
         searchPage.classList.remove("hidden");
-        detailsPage.classList.add("hidden");
+        categoryPage.classList.add("hidden");
+        window.scrollTo({ top:0, behavior:"smooth" });
+        return;
+    }
+
+    if(previousPageBeforeDetails === "category"){
+        currentPage = "category";
+        homeContent.classList.add("hidden");
+        searchPage.classList.add("hidden");
+        categoryPage.classList.remove("hidden");
         window.scrollTo({ top:0, behavior:"smooth" });
         return;
     }
@@ -1168,8 +1813,16 @@ function abrirConteudo(item){
 
     if(tipo === "tv"){
         movieFrame.src = `https://myembed.biz/serie/${item.id}`;
+
+        salvarContinuarAssistindo(item, {
+            watchedLabel: "Continuar série"
+        });
     }else{
         movieFrame.src = `https://myembed.biz/filme/${item.id}`;
+
+        salvarContinuarAssistindo(item, {
+            watchedLabel: "Continuar filme"
+        });
     }
 
     player.classList.add("active");
@@ -1326,6 +1979,211 @@ function renderMinhaLista(){
         });
         container.appendChild(card);
     });
+
+    if(currentPage === "category" && currentCategory === "mylist"){
+    renderMinhaListaCategoria();
+}
+
+}
+
+/* =========================
+   CONTINUAR ASSISTINDO
+========================= */
+function getContinueWatching(){
+    return JSON.parse(localStorage.getItem("poly_continue_watching")) || [];
+}
+
+function saveContinueWatching(list){
+    localStorage.setItem("poly_continue_watching", JSON.stringify(list));
+}
+
+function salvarContinuarAssistindo(item, extra = {}){
+    item = normalizarItem(item);
+    const list = getContinueWatching();
+    const tipo = getTipo(item);
+
+    const registro = {
+        id: item.id,
+        title: item.title || null,
+        name: item.name || null,
+        overview: item.overview || "",
+        backdrop_path: item.backdrop_path || null,
+        poster_path: item.poster_path || null,
+        media_type: tipo,
+        vote_average: item.vote_average || 0,
+        release_date: item.release_date || "",
+        first_air_date: item.first_air_date || "",
+        updatedAt: Date.now(),
+
+        // dados para retomar
+        season: extra.season ?? null,
+        episode: extra.episode ?? null,
+        watchedLabel: extra.watchedLabel || null
+    };
+
+    const index = list.findIndex(i => i.id === item.id && getTipo(i) === tipo);
+
+    if(index >= 0){
+        list[index] = {
+            ...list[index],
+            ...registro
+        };
+    }else{
+        list.unshift(registro);
+    }
+
+    // ordena do mais recente para o mais antigo
+    list.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+
+    saveContinueWatching(list);
+    renderContinuarAssistindo();
+}
+
+function removerContinuarAssistindo(item){
+    item = normalizarItem(item);
+    const tipo = getTipo(item);
+
+    const novaLista = getContinueWatching().filter(i => !(i.id === item.id && getTipo(i) === tipo));
+    saveContinueWatching(novaLista);
+    renderContinuarAssistindo();
+
+    if(currentPage === "category" && currentCategory === "continue"){
+        renderContinuarAssistindoCategoria();
+    }
+}
+
+function getContinueLabel(item){
+    if(getTipo(item) === "tv"){
+        if(item.season && item.episode){
+            return `Continuar T${item.season}E${item.episode}`;
+        }
+        return "Continuar assistindo";
+    }
+
+    return "Continuar filme";
+}
+
+function renderContinuarAssistindo(){
+    const container = document.getElementById("continuarAssistindo");
+    if(!container) return;
+
+    const lista = getContinueWatching();
+    container.innerHTML = "";
+
+    if(!lista.length){
+        container.innerHTML = `
+            <div class="empty-state" style="width:100%;">
+                <h3>Nada por aqui ainda</h3>
+                <p>Quando você começar a assistir algo, ele aparecerá aqui.</p>
+            </div>
+        `;
+        return;
+    }
+
+    lista.forEach(item => {
+        const card = criarCardContinuar(item);
+        container.appendChild(card);
+    });
+}
+
+function criarCardContinuar(item){
+    item = normalizarItem(item);
+
+    const imagePath = getImage(item);
+    if(!imagePath) return document.createElement("div");
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const titulo = getTitulo(item);
+    const tipo = getTipo(item) === "tv" ? "Série" : "Filme";
+    const ano = getAno(item);
+    const nota = getNota(item);
+    const label = getContinueLabel(item);
+
+    card.innerHTML = `
+        <img src="${IMG_W780}${imagePath}" alt="${titulo}">
+        <div class="card-overlay"></div>
+
+        <div class="card-actions">
+            <button class="icon-btn remove-continue-btn" title="Remover">🗑</button>
+        </div>
+
+        <div class="card-content">
+            <div class="card-title">${titulo}</div>
+            <div class="card-meta">
+                <span class="pill">${tipo}</span>
+                <span class="pill">${ano}</span>
+                <span class="pill">⭐ ${nota}</span>
+                <span class="pill">${label}</span>
+            </div>
+        </div>
+    `;
+
+    // AGORA abre os detalhes em vez de abrir o player direto
+    card.addEventListener("click", () => abrirDetalhes(item));
+
+    card.querySelector(".remove-continue-btn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        removerContinuarAssistindo(item);
+        showToast("Removido de Continuar Assistindo.");
+    });
+
+    return card;
+}
+
+function continuarAssistindoItem(item){
+    item = normalizarItem(item);
+
+    if(getTipo(item) === "tv"){
+        if(item.season && item.episode){
+            movieFrame.src = `https://myembed.biz/serie/${item.id}/${item.season}/${item.episode}`;
+            modalTitle.textContent = `${getTitulo(item)} • T${item.season}E${item.episode}`;
+            player.classList.add("active");
+            return;
+        }
+
+        movieFrame.src = `https://myembed.biz/serie/${item.id}`;
+        modalTitle.textContent = getTitulo(item);
+        player.classList.add("active");
+        return;
+    }
+
+    movieFrame.src = `https://myembed.biz/filme/${item.id}`;
+    modalTitle.textContent = getTitulo(item);
+    player.classList.add("active");
+}
+
+function renderContinuarAssistindoCategoria(){
+    const lista = getContinueWatching();
+    categoryResults.innerHTML = "";
+
+    if(!lista.length){
+        categoryResults.innerHTML = `
+            <div class="empty-state">
+                <h3>Nada para continuar</h3>
+                <p>Quando você começar a assistir algo, ele aparecerá aqui.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    lista.forEach(item => {
+        const card = criarSearchCard(item);
+
+        // adiciona um clique especial para continuar de onde parou
+        card.addEventListener("dblclick", (e) => {
+            e.preventDefault();
+            continuarAssistindoItem(item);
+        });
+
+        grid.appendChild(card);
+    });
+
+    categoryResults.appendChild(grid);
 }
 
 /* =========================
@@ -1501,6 +2359,236 @@ function criarSearchCard(item){
 }
 
 /* =========================
+   EPISÓDIOS ASSISTIDOS
+========================= */
+function getWatchedEpisodesMap(){
+    return JSON.parse(localStorage.getItem("poly_watched_episodes")) || {};
+}
+
+function saveWatchedEpisodesMap(map){
+    localStorage.setItem("poly_watched_episodes", JSON.stringify(map));
+}
+
+function getSeriesStorageKey(seriesId){
+    return `tv_${seriesId}`;
+}
+
+function getWatchedEpisodes(seriesId){
+    const map = getWatchedEpisodesMap();
+    return map[getSeriesStorageKey(seriesId)] || [];
+}
+
+function isEpisodeWatched(seriesId, seasonNumber, episodeNumber){
+    const watched = getWatchedEpisodes(seriesId);
+    return watched.some(ep =>
+        ep.season === seasonNumber && ep.episode === episodeNumber
+    );
+}
+
+function toggleEpisodeWatched(seriesId, seasonNumber, episodeNumber){
+    const map = getWatchedEpisodesMap();
+    const key = getSeriesStorageKey(seriesId);
+    const watched = map[key] || [];
+
+    const index = watched.findIndex(ep =>
+        ep.season === seasonNumber && ep.episode === episodeNumber
+    );
+
+    if(index >= 0){
+        watched.splice(index, 1);
+        showToast(`Episódio T${seasonNumber}E${episodeNumber} desmarcado.`);
+    }else{
+        watched.push({
+            season: seasonNumber,
+            episode: episodeNumber
+        });
+        showToast(`Episódio T${seasonNumber}E${episodeNumber} marcado como assistido.`);
+    }
+
+    map[key] = watched;
+    saveWatchedEpisodesMap(map);
+}
+
+function updateEpisodesProgress(seriesId, seasonNumber, totalEpisodes){
+    const watched = getWatchedEpisodes(seriesId)
+        .filter(ep => ep.season === seasonNumber).length;
+
+    episodesProgress.textContent = `${watched}/${totalEpisodes} assistidos`;
+}
+
+/* =========================
+   TEMPORADAS / EPISÓDIOS
+========================= */
+async function buscarDetalhesSerie(seriesId){
+    try{
+        const req = await fetch(`${TMDB_URL}/tv/${seriesId}?api_key=${TMDB_KEY}&language=pt-BR`);
+        return await req.json();
+    }catch(error){
+        console.error("Erro ao buscar detalhes da série:", error);
+        return null;
+    }
+}
+
+async function buscarTemporada(seriesId, seasonNumber){
+    try{
+        const req = await fetch(
+            `${TMDB_URL}/tv/${seriesId}/season/${seasonNumber}?api_key=${TMDB_KEY}&language=pt-BR`
+        );
+        return await req.json();
+    }catch(error){
+        console.error("Erro ao buscar temporada:", error);
+        return null;
+    }
+}
+
+function renderEpisodesLoading(){
+    episodesList.innerHTML = `
+        <div class="empty-state" style="padding:30px 10px;">
+            <div class="loader"></div>
+            <p>Carregando episódios...</p>
+        </div>
+    `;
+}
+
+function renderEpisodesEmpty(){
+    episodesList.innerHTML = `
+        <div class="empty-state" style="padding:30px 10px;">
+            <p>Nenhum episódio encontrado nesta temporada.</p>
+        </div>
+    `;
+}
+
+async function carregarTemporadaDaSerie(seriesId, seasonNumber){
+    renderEpisodesLoading();
+
+    const seasonData = await buscarTemporada(seriesId, seasonNumber);
+
+    if(!seasonData || !seasonData.episodes || !seasonData.episodes.length){
+        episodesProgress.textContent = "0/0 assistidos";
+        renderEpisodesEmpty();
+        return;
+    }
+
+    const episodios = seasonData.episodes;
+    episodesList.innerHTML = "";
+    episodesList.className = "episodes-list";
+
+    updateEpisodesProgress(seriesId, seasonNumber, episodios.length);
+
+    episodios.forEach(ep => {
+        const watched = isEpisodeWatched(seriesId, seasonNumber, ep.episode_number);
+
+        const card = document.createElement("div");
+        card.className = "episode-card";
+
+        const nome = ep.name || `Episódio ${ep.episode_number}`;
+        const overview = ep.overview || "Sem descrição disponível para este episódio.";
+        const nota = Number(ep.vote_average || 0).toFixed(1);
+        const duracao = ep.runtime ? `${ep.runtime} min` : "Duração indisponível";
+
+        card.innerHTML = `
+            <div class="episode-left">
+                <div class="episode-title">E${ep.episode_number} • ${nome}</div>
+
+                <div class="episode-meta">
+                    <span class="pill">Temporada ${seasonNumber}</span>
+                    <span class="pill">⭐ ${nota}</span>
+                    <span class="pill">${duracao}</span>
+                </div>
+
+                <div class="episode-desc">${overview}</div>
+            </div>
+
+            <div class="episode-right">
+                <button class="episode-watch-btn">▶ Assistir</button>
+                <button class="episode-check-btn ${watched ? "active" : ""}">
+                    ${watched ? "✓ Assistido" : "Marcar assistido"}
+                </button>
+            </div>
+        `;
+
+        const watchBtn = card.querySelector(".episode-watch-btn");
+        const checkBtn = card.querySelector(".episode-check-btn");
+
+        watchBtn.addEventListener("click", () => {
+    const itemBase = currentDetailsItem
+        ? normalizarItem(currentDetailsItem)
+        : {
+            id: seriesId,
+            media_type: "tv",
+            name: "Série"
+        };
+
+    salvarContinuarAssistindo(itemBase, {
+        season: seasonNumber,
+        episode: ep.episode_number,
+        watchedLabel: `Continuar T${seasonNumber}E${ep.episode_number}`
+    });
+
+    movieFrame.src = `https://myembed.biz/serie/${seriesId}/${seasonNumber}/${ep.episode_number}`;
+    modalTitle.textContent = `${currentDetailsItem ? getTitulo(currentDetailsItem) : "Série"} • T${seasonNumber}E${ep.episode_number}`;
+    player.classList.add("active");
+});
+
+        checkBtn.addEventListener("click", () => {
+            toggleEpisodeWatched(seriesId, seasonNumber, ep.episode_number);
+
+            const watchedNow = isEpisodeWatched(seriesId, seasonNumber, ep.episode_number);
+            checkBtn.classList.toggle("active", watchedNow);
+            checkBtn.textContent = watchedNow ? "✓ Assistido" : "Marcar assistido";
+
+            updateEpisodesProgress(seriesId, seasonNumber, episodios.length);
+        });
+
+        episodesList.appendChild(card);
+    });
+}
+
+async function montarPainelDeSerie(item){
+    const detalhesSerie = await buscarDetalhesSerie(item.id);
+
+    if(!detalhesSerie){
+        episodesList.innerHTML = `
+            <div class="empty-state" style="padding:30px 10px;">
+                <p>Não foi possível carregar as temporadas.</p>
+            </div>
+        `;
+        episodesProgress.textContent = "0/0 assistidos";
+        return;
+    }
+
+    const temporadasValidas = (detalhesSerie.seasons || []).filter(season => season.season_number > 0);
+
+    seasonSelect.innerHTML = "";
+
+    if(!temporadasValidas.length){
+        episodesList.innerHTML = `
+            <div class="empty-state" style="padding:30px 10px;">
+                <p>Essa série não possui temporadas disponíveis.</p>
+            </div>
+        `;
+        episodesProgress.textContent = "0/0 assistidos";
+        return;
+    }
+
+    temporadasValidas.forEach(season => {
+        const option = document.createElement("option");
+        option.value = season.season_number;
+        option.textContent = season.name || `Temporada ${season.season_number}`;
+        seasonSelect.appendChild(option);
+    });
+
+    const primeiraTemporada = Number(temporadasValidas[0].season_number);
+
+    seasonSelect.onchange = async () => {
+        const seasonNumber = Number(seasonSelect.value);
+        await carregarTemporadaDaSerie(item.id, seasonNumber);
+    };
+
+    await carregarTemporadaDaSerie(item.id, primeiraTemporada);
+}
+
+/* =========================
    DETALHES
 ========================= */
 function atualizarDetailsListBtn(item){
@@ -1574,8 +2662,14 @@ async function abrirDetalhes(item){
     item = normalizarItem(item);
     currentDetailsItem = item;
 
+    // guarda de qual tela veio ANTES de abrir detalhes
+    previousPageBeforeDetails = currentPage;
+
+    // agora mostra a tela de detalhes
+    currentPage = "details";
     homeContent.classList.add("hidden");
     searchPage.classList.add("hidden");
+    categoryPage.classList.add("hidden");
     detailsPage.classList.remove("hidden");
     window.scrollTo({ top:0, behavior:"smooth" });
 
@@ -1596,12 +2690,32 @@ async function abrirDetalhes(item){
     detailsBreadcrumb.textContent = `${tipo} • ${ano}`;
     detailsTitle.textContent = titulo;
     detailsDescription.textContent = item.overview || "Sem descrição disponível.";
-    detailsOverviewFull.textContent = item.overview || "Sem sinopse disponível.";
     detailsMeta.innerHTML = `
         <span class="badge">${tipo}</span>
         <span class="badge">${ano}</span>
         <span class="badge">⭐ ${nota}</span>
     `;
+
+    if(getTipo(item) === "tv"){
+        detailsLeftTitle.textContent = "Episódios";
+        movieDetailsBox.classList.add("hidden");
+        seriesEpisodesBox.classList.remove("hidden");
+
+        episodesList.innerHTML = `
+            <div class="empty-state" style="padding:30px 10px;">
+                <div class="loader"></div>
+                <p>Carregando temporadas...</p>
+            </div>
+        `;
+        episodesProgress.textContent = "0/0 assistidos";
+
+        await montarPainelDeSerie(item);
+    }else{
+        detailsLeftTitle.textContent = "Sinopse";
+        movieDetailsBox.classList.remove("hidden");
+        seriesEpisodesBox.classList.add("hidden");
+        detailsOverviewFull.textContent = item.overview || "Sem sinopse disponível.";
+    }
 
     if(imagem){
         detailsHero.style.backgroundImage = `
@@ -1610,7 +2724,23 @@ async function abrirDetalhes(item){
         `;
     }
 
-    document.getElementById("detailsWatchBtn").onclick = () => abrirConteudo(item);
+    document.getElementById("detailsWatchBtn").onclick = () => {
+    const continueList = getContinueWatching();
+    const tipo = getTipo(item);
+
+    const saved = continueList.find(i => i.id === item.id && getTipo(i) === tipo);
+
+    // Se for série e tiver episódio salvo, continua do episódio salvo
+    if(saved && tipo === "tv" && saved.season && saved.episode){
+        movieFrame.src = `https://myembed.biz/serie/${item.id}/${saved.season}/${saved.episode}`;
+        modalTitle.textContent = `${getTitulo(item)} • T${saved.season}E${saved.episode}`;
+        player.classList.add("active");
+        return;
+    }
+
+    // senão abre normalmente
+    abrirConteudo(item);
+};
 
     atualizarDetailsListBtn(item);
     document.getElementById("detailsListBtn").onclick = () => toggleMinhaLista(item);
@@ -1809,20 +2939,238 @@ searchInput.addEventListener("input", (e) => {
 });
 
 /* =========================
+   CATEGORIAS + ROLAGEM INFINITA
+========================= */
+function ensureCategoryGrid(){
+    let grid = categoryResults.querySelector(".grid");
+
+    if(!grid){
+        grid = document.createElement("div");
+        grid.className = "grid";
+        categoryResults.innerHTML = "";
+        categoryResults.appendChild(grid);
+    }
+
+    return grid;
+}
+
+function renderCategoryLoader(){
+    let loader = document.getElementById("categoryLoader");
+
+    if(!loader){
+        loader = document.createElement("div");
+        loader.id = "categoryLoader";
+        loader.className = "loader";
+        categoryResults.appendChild(loader);
+    }
+
+    loader.style.display = "block";
+}
+
+function hideCategoryLoader(){
+    const loader = document.getElementById("categoryLoader");
+    if(loader) loader.style.display = "none";
+}
+
+function renderCategoryEmpty(title){
+    categoryResults.innerHTML = `
+        <div class="empty-state">
+            <h3>Nenhum item encontrado</h3>
+            <p>Não encontramos títulos em <strong>${title}</strong>.</p>
+        </div>
+    `;
+}
+
+function getCategoryConfig(category){
+    switch(category){
+        case "movies":
+            return {
+                title: "Filmes",
+                subtitle: "Todos os filmes populares",
+                endpoint: `${TMDB_URL}/movie/popular?api_key=${TMDB_KEY}&language=pt-BR&page=`
+            };
+
+        case "series":
+            return {
+                title: "Séries",
+                subtitle: "Séries populares para maratonar",
+                endpoint: `${TMDB_URL}/tv/popular?api_key=${TMDB_KEY}&language=pt-BR&page=`
+            };
+
+        case "animations":
+            return {
+                title: "Animações",
+                subtitle: "Animações para todas as idades",
+                endpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=16&page=`
+            };
+
+            case "continue":
+    return {
+        title: "Continuar Assistindo",
+        subtitle: "Retome filmes e séries de onde parou"
+    };
+
+        case "mylist":
+            return {
+                title: "Minha Lista",
+                subtitle: "Os títulos que você salvou"
+            };
+
+        default:
+            return null;
+    }
+}
+
+async function abrirCategoria(category){
+    const config = getCategoryConfig(category);
+    if(!config) return;
+
+    currentCategory = category;
+    currentCategoryPage = 1;
+    hasMoreCategoryItems = true;
+
+    abrirTelaCategoria();
+
+    categoryPageTitle.textContent = config.title;
+    categorySubtitle.textContent = config.subtitle;
+    categoryResults.innerHTML = "";
+
+    if(category === "mylist"){
+    renderMinhaListaCategoria();
+    return;
+}
+
+if(category === "continue"){
+    renderContinuarAssistindoCategoria();
+    return;
+}
+
+    await carregarMaisCategoria();
+}
+
+async function carregarMaisCategoria(){
+    if(!currentCategory || isCategoryLoading || !hasMoreCategoryItems) return;
+
+    const config = getCategoryConfig(currentCategory);
+    if(!config) return;
+
+    isCategoryLoading = true;
+    renderCategoryLoader();
+
+    try{
+        const req = await fetch(`${config.endpoint}${currentCategoryPage}`);
+        const data = await req.json();
+
+        const itens = (data.results || []).filter(item => item.poster_path || item.backdrop_path);
+
+        if(!itens.length){
+            if(currentCategoryPage === 1){
+                renderCategoryEmpty(config.title);
+            }
+            hasMoreCategoryItems = false;
+            hideCategoryLoader();
+            isCategoryLoading = false;
+            return;
+        }
+
+        const grid = ensureCategoryGrid();
+
+        itens.forEach(item => {
+            if(currentCategory === "movies" || currentCategory === "animations"){
+                item.media_type = "movie";
+            }else if(currentCategory === "series"){
+                item.media_type = "tv";
+            }
+
+            grid.appendChild(criarSearchCard(item));
+        });
+
+        currentCategoryPage++;
+
+        if(currentCategoryPage > (data.total_pages || 1)){
+            hasMoreCategoryItems = false;
+        }
+
+    }catch(error){
+        console.error("Erro ao carregar categoria:", error);
+
+        if(currentCategoryPage === 1){
+            categoryResults.innerHTML = `
+                <div class="empty-state">
+                    <h3>Erro ao carregar categoria</h3>
+                    <p>Não foi possível carregar os títulos agora.</p>
+                </div>
+            `;
+        }
+    }
+
+    hideCategoryLoader();
+    isCategoryLoading = false;
+}
+
+function renderMinhaListaCategoria(){
+    const lista = getMinhaLista();
+    categoryResults.innerHTML = "";
+
+    if(!lista.length){
+        categoryResults.innerHTML = `
+            <div class="empty-state">
+                <h3>Sua lista está vazia</h3>
+                <p>Adicione filmes e séries para aparecerem aqui.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    lista.forEach(item => {
+        grid.appendChild(criarSearchCard(item));
+    });
+
+    categoryResults.appendChild(grid);
+}
+
+/* =========================
    EVENTOS
 ========================= */
 backHomeBtn.addEventListener("click", voltarParaHome);
 backFromDetailsBtn.addEventListener("click", voltarDaTelaDetalhes);
+backCategoryBtn.addEventListener("click", mostrarHome);
 logoBtn.addEventListener("click", mostrarHome);
 
 /* Menu */
 document.querySelectorAll(".menu-link").forEach(link => {
-    link.addEventListener("click", () => {
-        detailsPage.classList.add("hidden");
-        searchPage.classList.add("hidden");
-        homeContent.classList.remove("hidden");
-        currentPage = "home";
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const page = link.dataset.page;
+        const category = link.dataset.category;
+
+        if(page === "home"){
+            mostrarHome();
+            return;
+        }
+
+        if(category){
+            abrirCategoria(category);
+        }
     });
+});
+
+window.addEventListener("scroll", async () => {
+    if(currentPage !== "category") return;
+    if(currentCategory === "mylist" || currentCategory === "continue") return;
+    if(isCategoryLoading || !hasMoreCategoryItems) return;
+
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight;
+
+    if(scrollTop + windowHeight >= fullHeight - 600){
+        await carregarMaisCategoria();
+    }
 });
 
 /* =========================
@@ -1833,6 +3181,7 @@ carregarTop10();
 carregarFilmes();
 carregarSeries();
 carregarAnimacoes();
+renderContinuarAssistindo();
 renderMinhaLista();
 </script>
 </body>
