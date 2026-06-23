@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>POLY TV+ V3</title>
+<title>POLY TV+</title>
 
 <style>
 :root{
@@ -904,449 +904,67 @@ nav{
     transform:translateY(0);
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 1100px){
+/* ===== MOBILE ===== */
+@media(max-width:1000px){
     .details-grid{
         grid-template-columns:1fr;
     }
 
     .details-title{
-        font-size:44px;
+        font-size:46px;
     }
 }
 
-@media (max-width: 900px){
+@media(max-width:900px){
     .hero h1{
-        font-size:50px;
-    }
-
-    .hero p{
-        max-width:720px;
+        font-size:54px;
     }
 }
 
-@media (max-width: 768px){
-    /* NAV */
-    nav{
-        backdrop-filter:blur(14px);
-    }
-
+@media(max-width:768px){
     .nav-inner{
-        min-height:auto;
-        padding:12px 14px;
+        padding:12px 16px;
         flex-wrap:wrap;
-        align-items:center;
-        gap:12px;
+        align-items:flex-start;
     }
 
-    .logo{
-        font-size:24px;
-        flex:0 0 auto;
+    .menu{
+        display:none;
     }
 
     .right-tools{
-        order:3;
         width:100%;
     }
 
     .search-box{
         width:100%;
         min-width:0;
-        padding:11px 14px;
     }
 
-    /* menu não some: vira faixa horizontal rolável */
-    .menu{
-        order:2;
-        width:100%;
-        display:flex;
-        gap:10px;
-        overflow-x:auto;
-        overflow-y:hidden;
-        padding-bottom:4px;
-        scrollbar-width:none;
-        -ms-overflow-style:none;
-    }
-
-    .menu::-webkit-scrollbar{
-        display:none;
-    }
-
-    .menu a{
-        flex:0 0 auto;
-        padding:9px 14px;
-        border:1px solid rgba(255,255,255,.08);
-        border-radius:999px;
-        background:rgba(255,255,255,.05);
-        font-size:14px;
-        white-space:nowrap;
-    }
-
-    /* HERO */
     .hero{
-        min-height:78vh;
-        padding:150px 16px 28px;
+        min-height:88vh;
+        padding:120px 20px 50px;
         align-items:flex-end;
     }
 
-    .hero-content{
-        max-width:100%;
-    }
-
     .hero h1{
-        font-size:34px;
-        line-height:1.05;
-        margin-bottom:10px;
+        font-size:42px;
     }
 
     .hero p{
-        font-size:14px;
-        line-height:1.55;
-        max-width:100%;
-        margin-bottom:16px;
-        display:-webkit-box;
-        -webkit-line-clamp:4;
-        -webkit-box-orient:vertical;
-        overflow:hidden;
+        font-size:16px;
     }
 
-    .hero-badges{
-        gap:8px;
-        flex-wrap:wrap;
-        margin-bottom:16px;
-    }
-
-    .hero-actions{
-        width:100%;
-        flex-wrap:wrap;
-        gap:10px;
-    }
-
-    .hero-actions .btn{
-        flex:1 1 calc(50% - 5px);
-        min-width:0;
-        justify-content:center;
-        padding:12px 14px;
-        font-size:14px;
-    }
-
-    /* GERAL */
-    .page-wrap,
     .section,
     .search-page,
     .details-bottom{
-        padding-left:16px !important;
-        padding-right:16px !important;
-    }
-
-    .section{
-        margin-top:26px;
-    }
-
-    .section-header{
-        gap:8px;
-        margin-bottom:14px;
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .section-header h2{
-        font-size:22px;
-    }
-
-    .section-sub{
-        font-size:13px;
-    }
-
-    /* CARROSSEL */
-    .carousel{
-        gap:12px;
-        padding-bottom:6px;
-        scroll-snap-type:x proximity;
+        padding-left:20px;
+        padding-right:20px;
     }
 
     .card{
-        min-width:220px;
-        width:220px;
-        height:138px;
-        border-radius:16px;
-        scroll-snap-align:start;
-    }
-
-    .card-content{
-        padding:12px;
-    }
-
-    .card-title{
-        font-size:14px;
-        -webkit-line-clamp:2;
-    }
-
-    .card-meta{
-        gap:6px;
-    }
-
-    .pill{
-        font-size:11px;
-        padding:5px 8px;
-    }
-
-    .card-actions{
-        top:10px;
-        right:10px;
-    }
-
-    /* TOP 10 */
-    .top10-card{
-        min-width:240px;
-        width:240px;
-        height:150px;
-    }
-
-    .top10-number{
-        font-size:44px;
-        left:10px;
-        bottom:8px;
-    }
-
-    /* GRID DA BUSCA E CATEGORIAS */
-    .grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-        gap:14px;
-    }
-
-    .search-card{
-        border-radius:16px;
-    }
-
-    .search-card img{
-        height:220px;
-    }
-
-    .search-content{
-        padding:12px;
-    }
-
-    .search-title{
-        font-size:15px;
-        line-height:1.35;
-    }
-
-    .search-meta{
-        gap:6px;
-        font-size:12px;
-        flex-wrap:wrap;
-    }
-
-    .search-actions{
-        flex-direction:column;
-        gap:8px;
-    }
-
-    .search-actions .btn{
-        width:100%;
-        justify-content:center;
-    }
-
-    /* TELA DE BUSCA / CATEGORIA */
-    .search-page,
-    .category-page{
-        padding-top:110px;
-        padding-bottom:40px;
-    }
-
-    .search-header{
-        gap:12px;
-        margin-bottom:20px;
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .search-title-wrap h2{
-        font-size:24px;
-        line-height:1.15;
-    }
-
-    .search-title-wrap p{
-        font-size:14px;
-    }
-
-    /* DETALHES */
-    .details-hero{
-        min-height:auto;
-        padding:115px 16px 26px;
-    }
-
-    .details-title{
-        font-size:30px;
-        line-height:1.08;
-        margin-bottom:10px;
-    }
-
-    .details-desc{
-        font-size:14px;
-        line-height:1.6;
-        max-width:100%;
-    }
-
-    .details-meta{
-        gap:8px;
-        flex-wrap:wrap;
-        margin:14px 0 18px;
-    }
-
-    .details-actions{
-        width:100%;
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .details-actions .btn{
-        width:100%;
-        justify-content:center;
-    }
-
-    .details-bottom{
-        padding-top:22px;
-        padding-bottom:36px;
-    }
-
-    .details-grid{
-        gap:20px;
-    }
-
-    .details-left,
-    .details-right{
-        padding:18px;
-        border-radius:18px;
-    }
-
-    .details-left h3,
-    .details-right h3{
-        font-size:20px;
-    }
-
-    .details-overview{
-        font-size:14px;
-        line-height:1.7;
-    }
-
-    /* TEMPORADAS / EPISÓDIOS */
-    .season-select{
-        width:100%;
-        min-width:0;
-    }
-
-    .episode-card{
-        padding:14px;
-        border-radius:14px;
-    }
-
-    .episode-top{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
-
-    .episode-title{
-        font-size:15px;
-    }
-
-    .episode-overview{
-        font-size:13px;
-        line-height:1.55;
-    }
-
-    .episode-actions{
-        width:100%;
-        flex-direction:column;
-        gap:8px;
-    }
-
-    .episode-actions .btn{
-        width:100%;
-        justify-content:center;
-    }
-
-    /* PLAYER / TRAILER */
-    .modal{
-        padding:12px;
-        align-items:center;
-        justify-content:center;
-    }
-
-    .modal-content{
-        width:100%;
-        max-width:100%;
-        border-radius:18px;
-        padding:14px;
-    }
-
-    .modal-title{
-        font-size:15px;
-        margin-bottom:10px;
-        padding-right:36px;
-    }
-
-    .close{
-        top:10px;
-        right:12px;
-        font-size:28px;
-    }
-
-    #movieFrame,
-    .details-trailer-box iframe{
-        width:100%;
-        aspect-ratio:16 / 9;
-        height:auto;
-        border-radius:14px;
-    }
-
-    .details-trailer-box{
-        min-height:auto;
-    }
-
-    /* TOAST */
-    .toast{
-        left:16px;
-        right:16px;
-        bottom:16px;
-        transform:none;
-        width:auto;
-        max-width:none;
-        text-align:center;
-    }
-}
-
-@media (max-width: 560px){
-    .hero{
-        min-height:72vh;
-        padding-top:145px;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-
-    .hero p{
-        font-size:13px;
-        -webkit-line-clamp:3;
-    }
-
-    .hero-actions .btn{
-        flex:1 1 100%;
-    }
-
-    .card{
-        min-width:190px;
-        width:190px;
-        height:124px;
-    }
-
-    .top10-card{
-        min-width:210px;
-        width:210px;
-        height:138px;
+        min-width:250px;
+        height:160px;
     }
 
     .grid{
@@ -1354,71 +972,35 @@ nav{
     }
 
     .search-card img{
-        height:230px;
-    }
-
-    .details-title{
-        font-size:26px;
-    }
-
-    .details-left,
-    .details-right{
-        padding:16px;
-    }
-
-    .section-header h2{
-        font-size:20px;
-    }
-
-    .back-btn{
-        width:100%;
-        justify-content:center;
-    }
-}
-
-@media (max-width: 380px){
-    .logo{
-        font-size:21px;
-    }
-
-    .hero{
-        padding-top:138px;
-    }
-
-    .hero h1{
-        font-size:24px;
-    }
-
-    .card{
-        min-width:175px;
-        width:175px;
-        height:116px;
-    }
-
-    .top10-card{
-        min-width:190px;
-        width:190px;
-        height:126px;
-    }
-
-    .menu a{
-        font-size:13px;
-        padding:8px 12px;
-    }
-
-    .section-header h2{
-        font-size:18px;
-    }
-
-    .details-title{
-        font-size:23px;
+        height:210px;
     }
 
     .search-title-wrap h2{
-        font-size:21px;
+        font-size:24px;
+    }
+
+    .details-hero{
+        min-height:82vh;
+        padding:110px 20px 40px;
+    }
+
+    .details-title{
+        font-size:34px;
+    }
+
+    .details-desc{
+        font-size:15px;
+    }
+
+    .top10-card{
+        min-width:280px;
+        height:180px;
+    }
+
+    .top10-number{
+        font-size:52px;
     }
 }
-
 </style>
 </head>
 <body>
