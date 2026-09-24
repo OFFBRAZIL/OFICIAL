@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>VENDE-SE</title>
+<title>POLY TV+</title>
 
 <style>
 :root{
@@ -905,6 +905,15 @@ nav{
 }
 
 /* ===== MOBILE ===== */
+
+.mobile-menu-btn {
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+}
+
 @media(max-width:1000px){
     .details-grid{
         grid-template-columns:1fr;
@@ -931,6 +940,88 @@ nav{
     .menu{
         display:none;
     }
+
+    /* BOTÃO HAMBÚRGUER */
+.mobile-menu-btn {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin-right: 10px;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 21px;
+    height: 2px;
+
+    background: #fff;
+    border-radius: 10px;
+
+    transition: .25s ease;
+}
+
+/* MENU MOBILE */
+.mobile-menu {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+
+    padding: 0 16px;
+
+    transition:
+        max-height .3s ease,
+        opacity .25s ease,
+        padding .3s ease;
+}
+
+.mobile-menu.open {
+    max-height: 220px;
+    opacity: 1;
+
+    padding-top: 8px;
+    padding-bottom: 14px;
+}
+
+.mobile-menu .menu-link {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 44px;
+
+    padding: 0 12px;
+
+    color: #fff;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 10px;
+
+    transition: .2s ease;
+}
+
+.mobile-menu .menu-link:active {
+    background: rgba(255,255,255,.08);
+}
 
     .right-tools{
         width:100%;
@@ -1008,6 +1099,14 @@ nav{
 <!-- NAV -->
 <nav>
     <div class="nav-inner">
+
+        <!-- BOTÃO DO MENU MOBILE -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <div class="logo" id="logoBtn">POLY TV+</div>
 
         <div class="menu">
@@ -1017,6 +1116,31 @@ nav{
             <a href="#" class="menu-link" data-category="animations">Animações</a>
             <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
         </div>
+
+        <!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="#" class="menu-link" data-page="home">
+        Início
+    </a>
+
+    <a href="#" class="menu-link" data-category="movies">
+        Filmes
+    </a>
+
+    <a href="#" class="menu-link" data-category="series">
+        Séries
+    </a>
+
+    <a href="#" class="menu-link" data-category="animations">
+        Animações
+    </a>
+
+    <a href="#" class="menu-link" data-category="mylist">
+        Minha Lista
+    </a>
+
+</div>
 
         <div class="right-tools">
             <div class="search-box">
@@ -2722,6 +2846,19 @@ backFromDetailsBtn.addEventListener("click", voltarDaTelaDetalhes);
 backCategoryBtn.addEventListener("click", mostrarHome);
 logoBtn.addEventListener("click", mostrarHome);
 
+/* =========================
+   MENU MOBILE
+========================= */
+
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+mobileMenuBtn.addEventListener("click", () => {
+
+    mobileMenu.classList.toggle("open");
+
+});
+
 /* Menu */
 document.querySelectorAll(".menu-link").forEach(link => {
     link.addEventListener("click", (e) => {
@@ -2729,6 +2866,9 @@ document.querySelectorAll(".menu-link").forEach(link => {
 
         const page = link.dataset.page;
         const category = link.dataset.category;
+
+        /* Fecha o menu mobile */
+        mobileMenu.classList.remove("open");
 
         if(page === "home"){
             mostrarHome();
