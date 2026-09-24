@@ -1009,12 +1009,13 @@ nav{
     width:100%;
 
     max-height:0;
-
     overflow:hidden;
 
     opacity:0;
 
     padding:0 16px;
+
+    background:rgba(10,10,10,.98);
 
     transition:
         max-height .3s ease,
@@ -1141,63 +1142,55 @@ nav{
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-    <div class="nav-inner">
-
-        <!-- BOTÃO DO MENU MOBILE -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <div class="logo" id="logoBtn">POLY TV+</div>
-
-        <div class="menu">
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+    
+            <!-- BOTÃO DO MENU MOBILE -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+    
+            <!-- LOGO -->
+            <div class="logo" id="logoBtn">POLY TV+</div>
+    
+            <!-- MENU DESKTOP -->
+            <div class="menu">
+                <a href="#" class="menu-link" data-page="home">Início</a>
+                <a href="#" class="menu-link" data-category="movies">Filmes</a>
+                <a href="#" class="menu-link" data-category="series">Séries</a>
+                <a href="#" class="menu-link" data-category="animations">Animações</a>
+                <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
+            </div>
+    
+            <!-- PESQUISA -->
+            <div class="right-tools">
+                <div class="search-box">
+                    <span class="search-icon">🔎</span>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Buscar filmes ou séries..."
+                    />
+                </div>
+            </div>
+    
+        </div>
+    
+        <!-- MENU MOBILE -->
+        <div class="mobile-menu" id="mobileMenu">
             <a href="#" class="menu-link" data-page="home">Início</a>
             <a href="#" class="menu-link" data-category="movies">Filmes</a>
             <a href="#" class="menu-link" data-category="series">Séries</a>
             <a href="#" class="menu-link" data-category="animations">Animações</a>
             <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
         </div>
-
-        <!-- MENU MOBILE -->
-<div class="mobile-menu" id="mobileMenu">
-
-    <a href="#" class="menu-link" data-page="home">
-        Início
-    </a>
-
-    <a href="#" class="menu-link" data-category="movies">
-        Filmes
-    </a>
-
-    <a href="#" class="menu-link" data-category="series">
-        Séries
-    </a>
-
-    <a href="#" class="menu-link" data-category="animations">
-        Animações
-    </a>
-
-    <a href="#" class="menu-link" data-category="mylist">
-        Minha Lista
-    </a>
-
-</div>
-
-        <div class="right-tools">
-            <div class="search-box">
-                <span class="search-icon">🔎</span>
-                <input type="text" id="searchInput" placeholder="Buscar filmes ou séries..." />
-            </div>
-        </div>
-    </div>
-</nav>
-
-<!-- TELA DE BUSCA -->
-<section class="search-page hidden" id="searchPage">
+    </nav>
+    
+    <!-- TELA DE BUSCA -->
+    <section class="search-page hidden" id="searchPage">
     <div class="page-wrap">
         <div class="search-header">
             <button class="back-btn" id="backHomeBtn">← Voltar</button>
