@@ -1704,30 +1704,31 @@ function atualizarBotoesDeListaNaTela(){
 
 function renderMinhaLista(){
     const container = document.getElementById("minhaLista");
+    const section = document.getElementById("minhaListaSec");
     const lista = getMinhaLista();
+
     container.innerHTML = "";
 
+    // Se não houver nenhum filme/série, esconde a seção inteira
     if(lista.length === 0){
-        container.innerHTML = `
-            <div class="empty-state" style="width:100%;">
-                <h3>Sua lista está vazia</h3>
-                <p>Adicione filmes e séries para assistir depois.</p>
-            </div>
-        `;
+        section.classList.add("hidden");
         return;
     }
+
+    // Se houver itens, mostra a seção
+    section.classList.remove("hidden");
 
     lista.forEach(item => {
         const card = criarCard(item, () => abrirDetalhes(item), {
             showRemove:true
         });
+
         container.appendChild(card);
     });
 
     if(currentPage === "category" && currentCategory === "mylist"){
-    renderMinhaListaCategoria();
-}
-
+        renderMinhaListaCategoria();
+    }
 }
 
 /* =========================
@@ -1809,20 +1810,22 @@ function getContinueLabel(item){
 
 function renderContinuarAssistindo(){
     const container = document.getElementById("continuarAssistindo");
-    if(!container) return;
+    const section = document.getElementById("continuarSec");
+
+    if(!container || !section) return;
 
     const lista = getContinueWatching();
+
     container.innerHTML = "";
 
+    // Se não houver nada para continuar, esconde a seção inteira
     if(!lista.length){
-        container.innerHTML = `
-            <div class="empty-state" style="width:100%;">
-                <h3>Nada por aqui ainda</h3>
-                <p>Quando você começar a assistir algo, ele aparecerá aqui.</p>
-            </div>
-        `;
+        section.classList.add("hidden");
         return;
     }
+
+    // Se houver itens, mostra a seção
+    section.classList.remove("hidden");
 
     lista.forEach(item => {
         const card = criarCardContinuar(item);
