@@ -789,22 +789,6 @@ nav{
     border-color:rgba(41,209,125,.35);
 }
 
-@media(max-width:768px){
-    .episode-card{
-        flex-direction:column;
-    }
-
-    .episode-right{
-        width:100%;
-        min-width:0;
-    }
-
-    .episode-watch-btn,
-    .episode-check-btn{
-        width:100%;
-    }
-}
-
 /* ===== EMPTY / LOADING ===== */
 .empty-state{
     display:flex;
@@ -930,8 +914,6 @@ nav{
     }
 }
 
-@media(max-width:768px){
-
 /* ===== CABEÇALHO MOBILE ===== */
 
 .nav-inner{
@@ -999,61 +981,287 @@ nav{
     white-space:nowrap;
 }
 
-/* ===== MENU MOBILE ===== */
+/* ===== MENU MOBILE PREMIUM ===== */
 
 .mobile-menu{
     display:grid;
-
     grid-template-columns:1fr 1fr;
+    gap:8px;
 
     width:100%;
-
     max-height:0;
-    overflow:hidden;
 
+    overflow:hidden;
     opacity:0;
 
     padding:0 16px;
 
-    background:rgba(10,10,10,.98);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(18,18,20,.97) 0%,
+            rgba(7,7,9,.99) 100%
+        );
+
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
 
     transition:
-        max-height .3s ease,
+        max-height .4s cubic-bezier(.22,1,.36,1),
         opacity .25s ease,
-        padding .3s ease;
+        padding .4s cubic-bezier(.22,1,.36,1);
 }
 
 .mobile-menu.open{
-    max-height:220px;
+    max-height:280px;
 
     opacity:1;
 
-    padding-top:8px;
-    padding-bottom:14px;
+    padding-top:12px;
+    padding-bottom:18px;
+
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.mobile-menu .menu-link{
-    display:flex;
 
+/* ===== ITENS ===== */
+
+.mobile-menu .menu-link{
+    position:relative;
+
+    display:flex;
     align-items:center;
 
-    min-height:44px;
+    min-height:56px;
 
-    padding:0 12px;
+    padding:0 14px;
 
-    color:#fff;
+    color:rgba(255,255,255,.76);
+
     text-decoration:none;
 
     font-size:14px;
-    font-weight:600;
+    font-weight:500;
 
-    border-radius:10px;
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.018)
+        );
+
+    border:1px solid rgba(255,255,255,.055);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* ===== ÍCONES ===== */
+
+.mobile-menu .menu-link::before{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:30px;
+    height:30px;
+
+    margin-right:10px;
+
+    flex-shrink:0;
+
+    font-size:14px;
+
+    color:rgba(255,255,255,.75);
+
+    background:rgba(255,255,255,.055);
+
+    border:1px solid rgba(255,255,255,.045);
+
+    border-radius:9px;
 
     transition:.2s ease;
 }
 
+
+/* Ícone — Início */
+.mobile-menu .menu-link[data-page="home"]::before{
+    content:"⌂";
+    font-size:17px;
+}
+
+
+/* Ícone — Filmes */
+.mobile-menu .menu-link[data-category="movies"]::before{
+    content:"▶";
+    font-size:11px;
+}
+
+
+/* Ícone — Séries */
+.mobile-menu .menu-link[data-category="series"]::before{
+    content:"▣";
+    font-size:15px;
+}
+
+
+/* Ícone — Animações */
+.mobile-menu .menu-link[data-category="animations"]::before{
+    content:"✦";
+    font-size:15px;
+}
+
+
+/* Ícone — Minha Lista */
+.mobile-menu .menu-link[data-category="mylist"]::before{
+    content:"♡";
+    font-size:18px;
+}
+
+
+/* ===== SETA ===== */
+
+.mobile-menu .menu-link::after{
+    content:"›";
+
+    margin-left:auto;
+
+    font-size:21px;
+    font-weight:300;
+
+    color:rgba(255,255,255,.20);
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+
+
+/* ===== INÍCIO EM DESTAQUE ===== */
+
+.mobile-menu .menu-link[data-page="home"]{
+    grid-column:1 / -1;
+
+    min-height:52px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.035)
+        );
+
+    border-color:rgba(255,255,255,.09);
+}
+
+.mobile-menu .menu-link[data-page="home"]::before{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.045)
+        );
+}
+
+
+/* ===== HOVER ===== */
+
+.mobile-menu .menu-link:hover{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.04)
+        );
+
+    border-color:rgba(255,255,255,.12);
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.2);
+}
+
+.mobile-menu .menu-link:hover::before{
+    background:rgba(255,255,255,.10);
+    color:#fff;
+}
+
+.mobile-menu .menu-link:hover::after{
+    color:rgba(255,255,255,.65);
+    transform:translateX(3px);
+}
+
+
+/* ===== TOQUE ===== */
+
 .mobile-menu .menu-link:active{
-    background:rgba(255,255,255,.08);
+    transform:scale(.97);
+
+    background:rgba(255,255,255,.12);
+}
+
+
+/* ===== ENTRADA DOS ITENS ===== */
+
+.mobile-menu.open .menu-link{
+    animation:
+        mobileMenuItem
+        .4s
+        cubic-bezier(.22,1,.36,1)
+        both;
+}
+
+.mobile-menu.open .menu-link:nth-child(1){
+    animation-delay:.02s;
+}
+
+.mobile-menu.open .menu-link:nth-child(2){
+    animation-delay:.06s;
+}
+
+.mobile-menu.open .menu-link:nth-child(3){
+    animation-delay:.10s;
+}
+
+.mobile-menu.open .menu-link:nth-child(4){
+    animation-delay:.14s;
+}
+
+.mobile-menu.open .menu-link:nth-child(5){
+    animation-delay:.18s;
+}
+
+@keyframes mobileMenuItem{
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* ===== BUSCA MOBILE ===== */
@@ -1137,7 +1345,7 @@ nav{
 .top10-number{
     font-size:52px;
 }
-}
+
 </style>
 </head>
 <body>
@@ -1172,7 +1380,7 @@ nav{
                     <input
                         type="text"
                         id="searchInput"
-                        placeholder="Buscar filmes ou séries..."
+                        placeholder="Buscar títulos..."
                     />
                 </div>
             </div>
