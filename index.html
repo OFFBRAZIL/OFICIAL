@@ -1017,7 +1017,7 @@ nav{
 }
 
 .mobile-menu.open{
-    max-height:280px;
+    max-height:340px;
 
     opacity:1;
 
@@ -1125,6 +1125,11 @@ nav{
     font-size:15px;
 }
 
+/* Ícone — Animes */
+.mobile-menu .menu-link[data-category="animes"]::before{
+    content:"◈";
+    font-size:15px;
+}
 
 /* Ícone — Minha Lista */
 .mobile-menu .menu-link[data-category="mylist"]::before{
@@ -1370,6 +1375,7 @@ nav{
                 <a href="#" class="menu-link" data-category="movies">Filmes</a>
                 <a href="#" class="menu-link" data-category="series">Séries</a>
                 <a href="#" class="menu-link" data-category="animations">Animações</a>
+                <a href="#" class="menu-link" data-category="animes">Animes</a>
                 <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
             </div>
     
@@ -1393,6 +1399,7 @@ nav{
             <a href="#" class="menu-link" data-category="movies">Filmes</a>
             <a href="#" class="menu-link" data-category="series">Séries</a>
             <a href="#" class="menu-link" data-category="animations">Animações</a>
+            <a href="#" class="menu-link" data-category="animes">Animes</a>
             <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
         </div>
     </nav>
@@ -2959,6 +2966,13 @@ function getCategoryConfig(category){
                 endpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=16&page=`
             };
 
+            case "animes":
+    return {
+        title: "Animes",
+        subtitle: "Animes japoneses para maratonar",
+        endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_genres=16&with_origin_country=JP&sort_by=popularity.desc&page=`
+    };
+
             case "continue":
     return {
         title: "Continuar Assistindo",
@@ -3032,10 +3046,10 @@ async function carregarMaisCategoria(){
 
         itens.forEach(item => {
             if(currentCategory === "movies" || currentCategory === "animations"){
-                item.media_type = "movie";
-            }else if(currentCategory === "series"){
-                item.media_type = "tv";
-            }
+    item.media_type = "movie";
+}else if(currentCategory === "series" || currentCategory === "animes"){
+    item.media_type = "tv";
+}
 
             grid.appendChild(criarSearchCard(item));
         });
