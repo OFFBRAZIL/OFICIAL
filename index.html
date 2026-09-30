@@ -456,6 +456,37 @@ nav{
     gap:20px;
 }
 
+/* =========================
+   FILTROS DAS CATEGORIAS
+   ========================= */
+
+   .category-type-filters{
+    display:flex;
+    gap:10px;
+    margin:20px 0 25px;
+    flex-wrap:wrap;
+}
+
+.type-filter{
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    padding:9px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s ease;
+}
+
+.type-filter:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.type-filter.active{
+    background:#fff;
+    color:#000;
+}
+
 .search-card{
     min-height:330px;
     border-radius:22px;
@@ -1019,6 +1050,9 @@ nav{
 .mobile-menu.open{
     max-height:340px;
 
+    overflow-y:auto;
+    overflow-x:hidden;
+
     opacity:1;
 
     padding-top:12px;
@@ -1027,6 +1061,22 @@ nav{
     border-bottom:1px solid rgba(255,255,255,.07);
 }
 
+.mobile-menu.open::-webkit-scrollbar{
+    width:5px;
+}
+
+.mobile-menu.open::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.mobile-menu.open::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.25);
+    border-radius:10px;
+}
+
+.mobile-menu.open::-webkit-scrollbar-thumb:hover{
+    background:rgba(255,255,255,.4);
+}
 
 /* ===== ITENS ===== */
 
@@ -1134,6 +1184,21 @@ nav{
 .mobile-menu .menu-link[data-category="romance"]::before{
     content:"♥";
     font-size:15px;
+}
+
+.mobile-menu .menu-link[data-category="action"]::before{
+    content:"⚡";
+    font-size:15px;
+}
+
+.mobile-menu .menu-link[data-category="dorama"]::before{
+    content:"♡";
+    font-size:15px;
+}
+
+.mobile-menu .menu-link[data-category="turkish"]::before{
+    content:"◆";
+    font-size:13px;
 }
 
 /* Ícone — Minha Lista */
@@ -1382,6 +1447,9 @@ nav{
                 <a href="#" class="menu-link" data-category="animations">Animações</a>
                 <a href="#" class="menu-link" data-category="animes">Animes</a>
                 <a href="#" class="menu-link" data-category="romance">Romance</a>
+                <a href="#" class="menu-link" data-category="action">Ação</a>
+                <a href="#" class="menu-link" data-category="dorama">Dorama</a>
+                <a href="#" class="menu-link" data-category="turkish">Novela Turca</a>
                 <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
             </div>
     
@@ -1407,6 +1475,9 @@ nav{
             <a href="#" class="menu-link" data-category="animations">Animações</a>
             <a href="#" class="menu-link" data-category="animes">Animes</a>
             <a href="#" class="menu-link" data-category="romance">Romance</a>
+            <a href="#" class="menu-link" data-category="action">Ação</a>
+            <a href="#" class="menu-link" data-category="dorama">Dorama</a>
+            <a href="#" class="menu-link" data-category="turkish">Novela Turca</a>
             <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
         </div>
     </nav>
@@ -2916,7 +2987,6 @@ function ensureCategoryGrid(){
     if(!grid){
         grid = document.createElement("div");
         grid.className = "grid";
-        categoryResults.innerHTML = "";
         categoryResults.appendChild(grid);
     }
 
@@ -2983,8 +3053,31 @@ function getCategoryConfig(category){
     case "romance":
     return {
         title: "Romance",
-        subtitle: "Histórias de amor para assistir",
-        endpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10749&sort_by=popularity.desc&page=`
+        subtitle: "Filmes e séries de romance",
+        movieEndpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10749&sort_by=popularity.desc&page=`,
+        tvEndpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10749&sort_by=popularity.desc&page=`
+    };
+
+case "action":
+    return {
+        title: "Ação",
+        subtitle: "Filmes e séries de ação",
+        movieEndpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=28&sort_by=popularity.desc&page=`,
+        tvEndpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10759&sort_by=popularity.desc&page=`
+    };
+
+    case "dorama":
+    return {
+        title: "Dorama",
+        subtitle: "Doramas para assistir",
+        endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_origin_country=KR&sort_by=popularity.desc&page=`
+    };
+
+    case "turkish":
+    return {
+        title: "Novela Turca",
+        subtitle: "Novelas turcas para assistir",
+        endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_origin_country=TR&sort_by=popularity.desc&page=`
     };
 
             case "continue":
@@ -3004,19 +3097,81 @@ function getCategoryConfig(category){
     }
 }
 
+let categoryTypeFilter = "all";
+
+function criarFiltrosTipo(){
+
+    const filtros = document.createElement("div");
+
+    filtros.className = "category-type-filters";
+
+    filtros.innerHTML = `
+        <button class="type-filter active" data-type="all">
+            Todos
+        </button>
+
+        <button class="type-filter" data-type="movie">
+            Filmes
+        </button>
+
+        <button class="type-filter" data-type="tv">
+            Séries
+        </button>
+    `;
+
+    categoryResults.appendChild(filtros);
+
+    filtros.querySelectorAll(".type-filter").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const type = button.dataset.type;
+
+            if(categoryTypeFilter === type) return;
+
+            categoryTypeFilter = type;
+
+            filtros.querySelectorAll(".type-filter")
+                .forEach(btn => btn.classList.remove("active"));
+
+            button.classList.add("active");
+
+            currentCategoryPage = 1;
+            hasMoreCategoryItems = true;
+
+            const grid = categoryResults.querySelector(".grid");
+
+            if(grid){
+                grid.remove();
+            }
+
+            carregarMaisCategoria();
+        });
+
+    });
+}
+
 async function abrirCategoria(category){
     const config = getCategoryConfig(category);
     if(!config) return;
 
     currentCategory = category;
-    currentCategoryPage = 1;
-    hasMoreCategoryItems = true;
+currentCategoryPage = 1;
+hasMoreCategoryItems = true;
+
+if(category === "romance" || category === "action"){
+    categoryTypeFilter = "all";
+}
 
     abrirTelaCategoria();
 
     categoryPageTitle.textContent = config.title;
     categorySubtitle.textContent = config.subtitle;
     categoryResults.innerHTML = "";
+
+    if(category === "romance" || category === "action"){
+    criarFiltrosTipo();
+}
 
     if(category === "mylist"){
     renderMinhaListaCategoria();
@@ -3041,8 +3196,76 @@ async function carregarMaisCategoria(){
     renderCategoryLoader();
 
     try{
-        const req = await fetch(`${config.endpoint}${currentCategoryPage}`);
-        const data = await req.json();
+        let data;
+
+if(currentCategory === "romance" || currentCategory === "action"){
+
+    let endpoint;
+
+    if(categoryTypeFilter === "movie"){
+        endpoint = config.movieEndpoint;
+    }
+
+    else if(categoryTypeFilter === "tv"){
+        endpoint = config.tvEndpoint;
+    }
+
+    else{
+        const movieReq = await fetch(
+            `${config.movieEndpoint}${currentCategoryPage}`
+        );
+
+        const tvReq = await fetch(
+            `${config.tvEndpoint}${currentCategoryPage}`
+        );
+
+        const movieData = await movieReq.json();
+        const tvData = await tvReq.json();
+
+        const movies = (movieData.results || []).map(item => ({
+            ...item,
+            media_type: "movie"
+        }));
+
+        const series = (tvData.results || []).map(item => ({
+            ...item,
+            media_type: "tv"
+        }));
+
+        data = {
+            results: [
+                ...movies,
+                ...series
+            ],
+            total_pages: Math.max(
+                movieData.total_pages || 1,
+                tvData.total_pages || 1
+            )
+        };
+    }
+
+    if(endpoint){
+
+        const req = await fetch(
+            `${endpoint}${currentCategoryPage}`
+        );
+
+        data = await req.json();
+
+        data.results = (data.results || []).map(item => ({
+            ...item,
+            media_type: categoryTypeFilter
+        }));
+    }
+
+}else{
+
+    const req = await fetch(
+        `${config.endpoint}${currentCategoryPage}`
+    );
+
+    data = await req.json();
+}
 
         const itens = (data.results || []).filter(item => item.poster_path || item.backdrop_path);
 
@@ -3061,7 +3284,12 @@ async function carregarMaisCategoria(){
         itens.forEach(item => {
             if(currentCategory === "movies" || currentCategory === "animations"){
     item.media_type = "movie";
-}else if(currentCategory === "series" || currentCategory === "animes"){
+}else if(
+    currentCategory === "series" ||
+    currentCategory === "animes" ||
+    currentCategory === "dorama" ||
+    currentCategory === "turkish"
+){
     item.media_type = "tv";
 }
 
