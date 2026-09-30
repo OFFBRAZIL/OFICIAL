@@ -1131,6 +1131,11 @@ nav{
     font-size:15px;
 }
 
+.mobile-menu .menu-link[data-category="romance"]::before{
+    content:"♥";
+    font-size:15px;
+}
+
 /* Ícone — Minha Lista */
 .mobile-menu .menu-link[data-category="mylist"]::before{
     content:"♡";
@@ -1376,6 +1381,7 @@ nav{
                 <a href="#" class="menu-link" data-category="series">Séries</a>
                 <a href="#" class="menu-link" data-category="animations">Animações</a>
                 <a href="#" class="menu-link" data-category="animes">Animes</a>
+                <a href="#" class="menu-link" data-category="romance">Romance</a>
                 <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
             </div>
     
@@ -1400,6 +1406,7 @@ nav{
             <a href="#" class="menu-link" data-category="series">Séries</a>
             <a href="#" class="menu-link" data-category="animations">Animações</a>
             <a href="#" class="menu-link" data-category="animes">Animes</a>
+            <a href="#" class="menu-link" data-category="romance">Romance</a>
             <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
         </div>
     </nav>
@@ -2971,6 +2978,13 @@ function getCategoryConfig(category){
         title: "Animes",
         subtitle: "Animes japoneses para maratonar",
         endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_genres=16&with_origin_country=JP&sort_by=popularity.desc&page=`
+    };
+
+    case "romance":
+    return {
+        title: "Romance",
+        subtitle: "Histórias de amor para assistir",
+        endpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10749&sort_by=popularity.desc&page=`
     };
 
             case "continue":
