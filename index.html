@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>POLY TV+</title>
+<title>Poly TV+</title>
 
 <style>
 :root{
@@ -657,8 +657,84 @@ nav{
     display:flex;
     gap:12px;
     flex-wrap:wrap;
+    align-items:center;
     margin-top:26px;
 }
+
+/* ===== AVALIAÇÃO PESSOAL ===== */
+.personal-rating{
+    position:relative;
+    margin:6px 0 0;
+    padding:0;
+    width:auto;
+    max-width:100%;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+.personal-rating-title{
+    margin-top:6px;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.045);
+    color:#fff;
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .15s ease,border-color .15s ease;
+}
+.personal-rating-title:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);}
+.personal-rating-stars{
+    display:flex;
+    gap:2px;
+    align-items:center;
+    justify-content:center;
+    margin:8px 0 0;
+    padding:4px 7px;
+    border-radius:10px;
+    background:rgba(0,0,0,.22);
+    border:1px solid rgba(255,255,255,.08);
+    opacity:0;
+    visibility:hidden;
+    transform:translateX(-12px) scale(.92);
+    transform-origin:left center;
+    pointer-events:none;
+    width:max-content;
+    max-width:0;
+    overflow:hidden;
+    transition:opacity .45s ease,transform .45s ease,max-width .5s ease,visibility 0s linear .5s;
+}
+.personal-rating.is-open .personal-rating-stars{
+    opacity:1;
+    visibility:visible;
+    transform:translateX(0) scale(1);
+    pointer-events:auto;
+    max-width:200px;
+    transition:opacity .45s ease,transform .45s ease,max-width .5s ease;
+}
+.personal-rating-star{
+    border:0;background:transparent;color:rgba(255,255,255,.28);
+    font-size:23px;line-height:1;padding:1px 2px;cursor:pointer;
+    transform:translateY(-2px);
+    transition:color .15s ease,transform .15s ease;
+}
+.personal-rating-star:hover,.personal-rating-star.active{color:#ffd54a;}
+.personal-rating-star:hover{transform:scale(1.08);}
+.personal-rating-note{display:none;}
+@media(max-width:700px){
+    .personal-rating{width:auto;}
+    .personal-rating-title{padding:10px 12px;}
+}
+.profile-ratings{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;}
+.profile-rating-card{display:flex;gap:12px;align-items:center;padding:10px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.025);cursor:pointer;}
+.profile-rating-card img{width:54px;height:78px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.profile-rating-info{min-width:0;flex:1;}
+.profile-rating-title{font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.profile-rating-meta{margin-top:5px;color:#ffd54a;font-size:13px;}
+.profile-rating-remove{border:0;background:transparent;color:rgba(255,255,255,.45);cursor:pointer;font-size:16px;padding:5px;}
+@media(max-width:700px){.personal-rating{width:100%;}.personal-rating-star{font-size:26px;}.profile-ratings{grid-template-columns:1fr 1fr;}}
 
 .details-bottom{
     padding:36px 24px 40px;
@@ -1216,7 +1292,6 @@ nav{
     gap:8px;
 }
 
-.mobile-primary-actions .menu-link,
 .mobile-menu-section-title{
     grid-column:1 / -1;
 
@@ -1306,60 +1381,66 @@ nav{
 
 /* Ícone — Início */
 .mobile-menu .menu-link[data-page="home"]::before{
-    content:"⌂";
+    content:"🏠";
     font-size:17px;
 }
 
 
+/* Ícone — Meu Espaço */
+.mobile-menu .menu-link[data-page="profile"]::before{
+    content:"👤";
+    font-size:16px;
+}
+
 /* Ícone — Filmes */
 .mobile-menu .menu-link[data-category="movies"]::before{
-    content:"▶";
+    content:"▶️";
     font-size:11px;
 }
 
 
 /* Ícone — Séries */
 .mobile-menu .menu-link[data-category="series"]::before{
-    content:"▣";
+    content:"📺";
     font-size:15px;
 }
 
 
 /* Ícone — Animações */
 .mobile-menu .menu-link[data-category="animations"]::before{
-    content:"✦";
+    content:"🎬";
     font-size:15px;
 }
 
 /* Ícone — Animes */
 .mobile-menu .menu-link[data-category="animes"]::before{
-    content:"◈";
+    content:"🌸";
     font-size:15px;
 }
 
 .mobile-menu .menu-link[data-category="romance"]::before{
-    content:"♥";
+    content:"💕";
     font-size:15px;
 }
 
 .mobile-menu .menu-link[data-category="action"]::before{
-    content:"⚡";
+    content:"💥";
     font-size:15px;
 }
 
 .mobile-menu .menu-link[data-category="dorama"]::before{
-    content:"♡";
+    content:"🇰🇷";
     font-size:15px;
 }
 
 .mobile-menu .menu-link[data-category="turkish"]::before{
-    content:"◆";
+    content:"🇹🇷";
     font-size:13px;
 }
 
 /* Ícone — Minha Lista */
 .mobile-menu .menu-link[data-category="mylist"]::before{
-    content:"♡";
+    content:"➕";
     font-size:18px;
 }
 
@@ -1561,6 +1642,83 @@ nav{
 
 }
 
+
+
+/* ===== MEU ESPAÇO ===== */
+.profile-page{
+    min-height:calc(100vh - 70px);
+    padding:110px 24px 70px;
+    background:radial-gradient(circle at 50% 0%, rgba(255,255,255,.055), transparent 38%),#080809;
+}
+.profile-wrap{width:100%;max-width:1050px;margin:0 auto;}
+.profile-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;}
+.profile-back{flex-shrink:0;}
+.profile-title-block h1{margin:0;font-size:34px;line-height:1.05;letter-spacing:-.8px;}
+.profile-title-block p{margin:8px 0 0;color:var(--muted);font-size:14px;}
+.profile-hero{
+    display:grid;grid-template-columns:190px 1fr;gap:26px;align-items:center;
+    padding:28px;border:1px solid rgba(255,255,255,.08);border-radius:22px;
+    background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+    box-shadow:var(--shadow);margin-bottom:18px;
+}
+.profile-main{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.profile-avatar-wrap{position:relative;width:118px;height:118px;flex-shrink:0;}
+.profile-avatar{width:118px;height:118px;display:flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.055));border:1px solid rgba(255,255,255,.13);box-shadow:0 16px 40px rgba(0,0,0,.28);font-size:38px;font-weight:800;letter-spacing:-1px;transition:border-color .18s ease,transform .18s ease;}
+.profile-avatar:hover{border-color:rgba(255,255,255,.3);transform:scale(1.02);}
+.profile-avatar:focus-visible{outline:2px solid rgba(255,255,255,.75);outline-offset:4px;}
+.profile-avatar img{width:100%;height:100%;display:block;object-fit:cover;}
+.profile-avatar-camera{position:absolute;right:2px;bottom:2px;width:32px;height:32px;border:2px solid rgba(12,12,12,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;color:#111;font-size:15px;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.3);}
+.profile-photo-actions{display:flex;gap:8px;justify-content:center;margin-top:10px;}
+.profile-photo-btn{border:0;background:transparent;color:var(--muted);font:inherit;font-size:11px;cursor:pointer;padding:4px 7px;}
+.profile-photo-btn:hover{color:#fff;}
+.profile-name-display{margin-top:16px;font-size:21px;font-weight:800;}
+.profile-local-note{margin-top:7px;color:var(--muted);font-size:12px;line-height:1.45;}
+.profile-content h2{margin:0 0 17px;font-size:20px;}
+.profile-form{display:flex;gap:10px;margin-bottom:20px;}
+.profile-input{flex:1;min-width:0;height:46px;padding:0 14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;outline:none;color:#fff;background:rgba(0,0,0,.28);font:inherit;}
+.profile-input:focus{border-color:rgba(255,255,255,.25);}
+.profile-save{flex-shrink:0;}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.profile-stat{padding:15px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.025);}
+.profile-stat-value{display:block;font-size:24px;font-weight:800;}
+.profile-stat-label{display:block;margin-top:4px;color:var(--muted);font-size:11px;}
+.profile-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.profile-actions .btn{min-height:42px;}
+.profile-section{padding:22px;border:1px solid rgba(255,255,255,.07);border-radius:20px;background:rgba(255,255,255,.025);margin-bottom:18px;}
+.profile-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;}
+.profile-section-head h2{margin:0;font-size:20px;}
+.profile-section-head p{margin:4px 0 0;color:var(--muted);font-size:12px;}
+.profile-link-btn{border:0;background:none;color:rgba(255,255,255,.68);cursor:pointer;font:inherit;font-size:13px;}
+.profile-link-btn:hover{color:#fff;}
+.profile-history{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+.profile-history-card{position:relative;min-width:0;cursor:pointer;border-radius:13px;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,.06);}
+.profile-history-card img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;}
+.profile-history-info{padding:9px 9px 10px;}
+.profile-history-title{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.profile-history-meta{margin-top:4px;color:var(--muted);font-size:10px;}
+.profile-history-card:hover{border-color:rgba(255,255,255,.16);}
+.profile-empty{padding:24px 10px;text-align:center;color:var(--muted);font-size:13px;white-space:nowrap;width:100%;display:block;box-sizing:border-box;}
+#profileRatings .profile-empty{grid-column:1 / -1;}
+.profile-tools{display:grid;grid-template-columns:1fr;gap:12px;}
+.profile-tool{padding:18px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:rgba(255,255,255,.025);}
+.profile-tool h3{margin:0 0 7px;font-size:16px;}
+.profile-tool p{margin:0 0 14px;color:var(--muted);font-size:12px;line-height:1.5;}
+.profile-tool .btn{width:100%;}
+.profile-danger{margin-top:8px;color:rgba(255,255,255,.48);font-size:11px;}
+@media(max-width:800px){
+    .profile-hero{grid-template-columns:1fr;gap:20px;}
+    .profile-stats{grid-template-columns:repeat(2,1fr);}
+    .profile-history{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:700px){
+    .profile-page{padding:95px 16px 50px;}
+    .profile-header{align-items:flex-start;}
+    .profile-title-block h1{font-size:28px;}
+    .profile-hero,.profile-section{padding:20px;}
+    .profile-form{flex-direction:column;}
+    .profile-save{width:100%;}
+    .profile-tools{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -1602,15 +1760,16 @@ nav{
                         <div class="desktop-category-grid">
                             <a href="#" class="desktop-category-item menu-link" data-category="animations">Animações</a>
                             <a href="#" class="desktop-category-item menu-link" data-category="animes">Animes</a>
-                            <a href="#" class="desktop-category-item menu-link" data-category="romance">Romance</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="romance">Romances</a>
                             <a href="#" class="desktop-category-item menu-link" data-category="action">Ação</a>
-                            <a href="#" class="desktop-category-item menu-link" data-category="dorama">Dorama</a>
-                            <a href="#" class="desktop-category-item menu-link" data-category="turkish">Novela Turca</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="dorama">Doramas</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="turkish">Novelas Turcas</a>
                         </div>
                     </div>
                 </div>
 
                 <a href="#" class="desktop-nav-link menu-link" data-category="mylist">Minha Lista</a>
+                <a href="#" class="desktop-nav-link menu-link" data-page="profile">Meu Espaço</a>
             </div>
     
             <!-- PESQUISA -->
@@ -1633,6 +1792,7 @@ nav{
 
             <div class="mobile-primary-actions">
                 <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
+                <a href="#" class="menu-link" data-page="profile">Meu Espaço</a>
             </div>
 
             <div class="mobile-menu-section-title">EXPLORAR</div>
@@ -1643,10 +1803,10 @@ nav{
             <div class="mobile-menu-section-title">GÊNEROS</div>
             <a href="#" class="menu-link" data-category="animations">Animações</a>
             <a href="#" class="menu-link" data-category="animes">Animes</a>
-            <a href="#" class="menu-link" data-category="romance">Romance</a>
+            <a href="#" class="menu-link" data-category="romance">Romances</a>
             <a href="#" class="menu-link" data-category="action">Ação</a>
-            <a href="#" class="menu-link" data-category="dorama">Dorama</a>
-            <a href="#" class="menu-link" data-category="turkish">Novela Turca</a>
+            <a href="#" class="menu-link" data-category="dorama">Doramas</a>
+            <a href="#" class="menu-link" data-category="turkish">Novelas Turcas</a>
         </div>
     </nav>
     
@@ -1700,6 +1860,12 @@ nav{
                 <button class="btn btn-primary" id="detailsWatchBtn">▶ Assistir</button>
                 <button class="btn btn-secondary" id="detailsTrailerBtn">🎬 Ver Trailer</button>
                 <button class="btn btn-secondary" id="detailsListBtn">+ Minha Lista</button>
+
+                <div class="personal-rating" id="personalRating">
+                    <button class="personal-rating-title" id="personalRatingToggle" type="button">♡ Avaliar</button>
+                    <div class="personal-rating-stars" id="personalRatingStars" aria-label="Avalie de 1 a 5 estrelas"></div>
+                    <div class="personal-rating-note" id="personalRatingNote">Você ainda não avaliou este título.</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1752,6 +1918,84 @@ nav{
     </div>
 </section>
 
+<!-- MEU ESPAÇO -->
+<section class="profile-page hidden" id="profilePage">
+    <div class="profile-wrap">
+        <div class="profile-header">
+            <button class="back-btn profile-back" id="backProfileBtn">← Voltar</button>
+            <div class="profile-title-block">
+                <h1>👤 Meu Espaço</h1>
+                <p>Seu histórico, sua lista e suas escolhas no POLY TV+.</p>
+            </div>
+        </div>
+
+        <div class="profile-hero">
+            <div class="profile-main">
+                <div class="profile-avatar-wrap">
+                    <div class="profile-avatar" id="profileAvatar" role="button" tabindex="0" aria-label="Alterar foto de perfil" title="Alterar foto de perfil">EU</div>
+                    <div class="profile-avatar-camera" aria-hidden="true">📷</div>
+                </div>
+                <input id="profilePhotoInput" type="file" accept="image/*" hidden>
+                <div class="profile-photo-actions">
+                    <button class="profile-photo-btn" id="profilePhotoBtn" type="button">Alterar foto</button>
+                    <button class="profile-photo-btn" id="removeProfilePhotoBtn" type="button" hidden>Remover</button>
+                </div>
+                <div class="profile-name-display" id="profileNameDisplay">Meu perfil</div>
+                <div class="profile-local-note">Tudo fica salvo neste navegador.</div>
+            </div>
+
+            <div class="profile-content">
+                <h2>Como você quer aparecer?</h2>
+                <div class="profile-form">
+                    <input class="profile-input" id="profileNameInput" type="text" maxlength="30" placeholder="Digite seu nome" autocomplete="off">
+                    <button class="btn btn-primary profile-save" id="saveProfileBtn">Salvar</button>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="profile-stat"><span class="profile-stat-value" id="profileListCount">0</span><span class="profile-stat-label">❤️ Na Minha Lista</span></div>
+                    <div class="profile-stat"><span class="profile-stat-value" id="profileContinueCount">0</span><span class="profile-stat-label">▶️ Continuando</span></div>
+                    <div class="profile-stat"><span class="profile-stat-value" id="profileHistoryCount">0</span><span class="profile-stat-label">🕐 Vistos recentemente</span></div>
+                    <div class="profile-stat"><span class="profile-stat-value" id="profileExploredCount">0</span><span class="profile-stat-label">🎬 Títulos explorados</span></div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn btn-secondary" id="profileListBtn">❤️ Minha Lista</button>
+                    <button class="btn btn-secondary" id="profileContinueBtn">▶️ Continuar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-head">
+                <div><h2>🕐 Vistos recentemente</h2><p>Os últimos títulos que você abriu no site.</p></div>
+                <button class="profile-link-btn" id="clearHistoryBtn">Limpar</button>
+            </div>
+            <div class="profile-history" id="profileHistory"></div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-head">
+                <div><h2>⭐ Minhas avaliações</h2><p>As notas que você deu aos filmes e séries.</p></div>
+            </div>
+            <div class="profile-ratings" id="profileRatings"></div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-head">
+                <div><h2>🎲 O que assistir?</h2><p>Deixe o POLY TV+ escolher um título entre os que você já separou.</p></div>
+            </div>
+            <div class="profile-tools">
+                <div class="profile-tool">
+                    <h3>Escolha por mim</h3>
+                    <p>Sorteia um filme ou série da sua Minha Lista. Se não houver nada salvo, use a busca para encontrar algo primeiro.</p>
+                    <button class="btn btn-primary" id="profileRandomBtn">🎲 Escolher por mim</button>
+                </div>
+            </div>
+            <div class="profile-danger">O histórico é local e pode ser apagado a qualquer momento.</div>
+        </div>
+    </div>
+</section>
+
 <!-- HOME -->
 <div id="homeContent" class="home-content">
     <section class="hero" id="inicio">
@@ -1778,7 +2022,7 @@ nav{
     <section class="section" id="continuarSec">
         <div class="page-wrap">
             <div class="section-header">
-                <h2>▶ Continuar Assistindo</h2>
+                <h2>▶️ Continuar Assistindo</h2>
                 <span class="section-sub">Retome de onde você parou</span>
             </div>
             <div class="carousel" id="continuarAssistindo"></div>
@@ -1872,6 +2116,7 @@ const modalTitle = document.getElementById("modalTitle");
 
 const homeContent = document.getElementById("homeContent");
 const searchPage = document.getElementById("searchPage");
+const profilePage = document.getElementById("profilePage");
 const detailsPage = document.getElementById("detailsPage");
 
 const categoryPage = document.getElementById("categoryPage");
@@ -1888,6 +2133,24 @@ const searchInput = document.getElementById("searchInput");
 const toast = document.getElementById("toast");
 
 const backFromDetailsBtn = document.getElementById("backFromDetailsBtn");
+const backProfileBtn = document.getElementById("backProfileBtn");
+const profileAvatar = document.getElementById("profileAvatar");
+const profilePhotoInput = document.getElementById("profilePhotoInput");
+const profilePhotoBtn = document.getElementById("profilePhotoBtn");
+const removeProfilePhotoBtn = document.getElementById("removeProfilePhotoBtn");
+const profileNameDisplay = document.getElementById("profileNameDisplay");
+const profileNameInput = document.getElementById("profileNameInput");
+const saveProfileBtn = document.getElementById("saveProfileBtn");
+const profileListCount = document.getElementById("profileListCount");
+const profileContinueCount = document.getElementById("profileContinueCount");
+const profileHistoryCount = document.getElementById("profileHistoryCount");
+const profileExploredCount = document.getElementById("profileExploredCount");
+const profileRatings = document.getElementById("profileRatings");
+const profileHistory = document.getElementById("profileHistory");
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+const profileRandomBtn = document.getElementById("profileRandomBtn");
+const profileListBtn = document.getElementById("profileListBtn");
+const profileContinueBtn = document.getElementById("profileContinueBtn");
 const logoBtn = document.getElementById("logoBtn");
 
 let heroItem = null;
@@ -1944,12 +2207,277 @@ function getImage(item){
 }
 
 /* =========================
+   MEU ESPAÇO
+========================= */
+function getProfileName(){
+    return (localStorage.getItem("poly_profile_name") || "").trim();
+}
+
+function getProfileInitials(name){
+    const clean = (name || "Meu perfil").trim();
+    if(!clean) return "EU";
+    const parts = clean.split(/\s+/).filter(Boolean);
+    if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function getPersonalRatings(){
+    try{return JSON.parse(localStorage.getItem("poly_personal_ratings")) || {};}catch(e){return {};}
+}
+
+function savePersonalRatings(ratings){
+    localStorage.setItem("poly_personal_ratings", JSON.stringify(ratings));
+}
+
+function getPersonalRating(item){
+    item = normalizarItem(item);
+    if(!item || !item.id) return 0;
+
+    const saved = getPersonalRatings()[`${getTipo(item)}:${item.id}`];
+
+    // A avaliação nova é salva como objeto; versões antigas podem ter salvo só o número.
+    const rating = saved && typeof saved === "object"
+        ? Number(saved.rating || 0)
+        : Number(saved || 0);
+
+    return Number.isFinite(rating) ? Math.max(0, Math.min(5, rating)) : 0;
+}
+
+function setPersonalRating(item, rating){
+    item = normalizarItem(item);
+    if(!item || !item.id) return;
+    const ratings = getPersonalRatings();
+    const key = `${getTipo(item)}:${item.id}`;
+    if(rating === 0) delete ratings[key];
+    else ratings[key] = {
+        rating, id:item.id, title:item.title||null, name:item.name||null,
+        overview:item.overview||"", poster_path:item.poster_path||null,
+        backdrop_path:item.backdrop_path||null, media_type:getTipo(item),
+        vote_average:item.vote_average||0, release_date:item.release_date||"",
+        first_air_date:item.first_air_date||"", updatedAt:Date.now()
+    };
+    savePersonalRatings(ratings);
+    renderDetailsRating(item);
+    renderProfileRatings();
+}
+
+function renderDetailsRating(item){
+    const box = document.getElementById("personalRating");
+    const toggle = document.getElementById("personalRatingToggle");
+    const stars = document.getElementById("personalRatingStars");
+    const note = document.getElementById("personalRatingNote");
+    if(!box || !toggle || !stars || !note) return;
+    const current = getPersonalRating(item);
+    box.classList.remove("is-open");
+    toggle.textContent = current ? `⭐ ${current}/5` : "♡ Avaliar";
+    toggle.onclick = () => box.classList.toggle("is-open");
+    stars.innerHTML = "";
+    for(let i=1;i<=5;i++){
+        const btn=document.createElement("button");
+        btn.type="button"; btn.className=`personal-rating-star ${i<=current?"active":""}`;
+        btn.textContent="★"; btn.title=`Avaliar com ${i} estrela${i>1?"s":""}`;
+        btn.addEventListener("click",()=>setPersonalRating(item, current===i ? 0 : i));
+        stars.appendChild(btn);
+    }
+    note.textContent=current ? `Sua nota: ${current}/5` : "";
+}
+
+function renderProfileRatings(){
+    if(!profileRatings) return;
+    const limiteAvaliacoes = window.innerWidth <= 700 ? 6 : 5;
+    const savedRatings = getPersonalRatings();
+    const fontes=[...getMinhaLista(),...getContinueWatching(),...getProfileHistory()];
+    const ratings=[];
+    const entries=Array.isArray(savedRatings)?savedRatings.map((v,i)=>[String(i),v]):Object.entries(savedRatings||{});
+    entries.forEach(([key,saved])=>{
+        if(saved==null) return;
+        let rating=0,updatedAt=0,item=null;
+        if(typeof saved==='object'){
+            rating=Number(saved.rating ?? saved.nota ?? saved.stars ?? 0);
+            updatedAt=Number(saved.updatedAt||saved.updated_at||saved.timestamp||0);
+            if(saved.id) item=normalizarItem({...saved});
+        }else rating=Number(saved);
+        const parts=String(key).split(':');
+        const tipoKey=parts[0]==='tv'||parts[0]==='series'?'tv':'movie';
+        const idKey=parts.length>1?parts[1]:parts[0];
+        if(!item && /^\d+$/.test(String(idKey))){
+            const encontrado=fontes.find(i=>String(i.id)===String(idKey)&&getTipo(i)===tipoKey);
+            item=normalizarItem(encontrado||{id:Number(idKey),media_type:tipoKey});
+        }
+        if(item&&item.id){
+            const encontrado=fontes.find(i=>String(i.id)===String(item.id)&&getTipo(i)===getTipo(item));
+            if(encontrado) item=normalizarItem({...encontrado,...item});
+        }
+        if(item&&item.id&&Number.isFinite(rating)&&rating>=1&&rating<=5) ratings.push({item,rating,updatedAt});
+    });
+    ratings.sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+    profileRatings.innerHTML='';
+    if(!ratings.length){
+        profileRatings.innerHTML='<div class="profile-empty">Você ainda não avaliou nenhum filme ou série.</div>';
+        return;
+    }
+    ratings.slice(0,limiteAvaliacoes).forEach(({item,rating})=>{
+        const card=document.createElement('div');
+        card.className='profile-rating-card';
+        const image=item.poster_path||item.backdrop_path||null;
+        const estrelas='★'.repeat(rating)+'☆'.repeat(5-rating);
+        card.innerHTML=`${image?`<img src="${IMG_W780}${image}" alt="${getTitulo(item)}" loading="lazy" decoding="async">`:''}<div class="profile-rating-info"><div class="profile-rating-title">${getTitulo(item)}</div><div class="profile-rating-meta">${estrelas}</div></div><button class="profile-rating-remove" title="Remover avaliação" type="button">×</button>`;
+        card.addEventListener('click',()=>abrirDetalhes(item));
+        card.querySelector('.profile-rating-remove').addEventListener('click',e=>{e.stopPropagation();setPersonalRating(item,0);showToast('Avaliação removida.');});
+        profileRatings.appendChild(card);
+    });
+}
+function getProfileHistory(){
+    try{return JSON.parse(localStorage.getItem("poly_history")) || [];}catch(e){return [];}
+}
+
+function saveProfileHistory(list){
+    localStorage.setItem("poly_history", JSON.stringify(list.slice(0,20)));
+}
+
+function registrarHistorico(item){
+    item = normalizarItem(item);
+    if(!item || !item.id) return;
+    const tipo = getTipo(item);
+    const continuarSalvo = getContinueWatching().find(i => String(i.id) === String(item.id) && getTipo(i) === tipo);
+    const registro = {
+        id:item.id,title:item.title||null,name:item.name||null,
+        overview:item.overview||"",poster_path:item.poster_path||null,
+        backdrop_path:item.backdrop_path||null,media_type:tipo,
+        vote_average:item.vote_average||0,release_date:item.release_date||"",
+        first_air_date:item.first_air_date||"",
+        season:item.season ?? continuarSalvo?.season ?? null,
+        episode:item.episode ?? continuarSalvo?.episode ?? null,
+        watchedLabel:continuarSalvo?.watchedLabel || null,
+        updatedAt:Date.now()
+    };
+    const lista = getProfileHistory().filter(i => !(String(i.id) === String(registro.id) && getTipo(i) === tipo));
+    lista.unshift(registro);
+    saveProfileHistory(lista);
+    if(currentPage === "profile") renderMeuEspaco();
+}
+
+function renderProfileHistory(){
+    if(!profileHistory) return;
+    const limiteHistorico = window.innerWidth <= 700 ? 6 : 5;
+    const lista = getProfileHistory().slice(0,limiteHistorico);
+    profileHistory.innerHTML = "";
+    if(!lista.length){
+        profileHistory.innerHTML = `<div class="profile-empty" style="grid-column:1/-1;">Você ainda não abriu nenhum título. Explore a Home e o histórico aparecerá aqui.</div>`;
+        return;
+    }
+    lista.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "profile-history-card";
+        const image = item.poster_path || item.backdrop_path;
+        card.innerHTML = `
+            <img src="${image ? IMG_W780 + image : ''}" alt="${getTitulo(item)}" loading="lazy" decoding="async">
+            <div class="profile-history-info">
+                <div class="profile-history-title">${getTitulo(item)}</div>
+                <div class="profile-history-meta">${getTipo(item)==="tv" ? "Série" : "Filme"} • ${getAno(item)}</div>
+            </div>`;
+        card.addEventListener("click", () => abrirHistorico(item));
+        profileHistory.appendChild(card);
+    });
+}
+
+function abrirHistorico(item){
+    item = normalizarItem(item);
+    if(!item || !item.id) return;
+    const tipo = getTipo(item);
+    const continuar = getContinueWatching().find(i => String(i.id) === String(item.id) && getTipo(i) === tipo);
+    if(tipo === "tv"){
+        const season = item.season ?? continuar?.season ?? null;
+        const episode = item.episode ?? continuar?.episode ?? null;
+        if(season && episode) item = normalizarItem({...item,season,episode});
+    }
+    abrirConteudo(item);
+}
+
+function getProfilePhoto(){
+    return localStorage.getItem("poly_profile_photo") || "";
+}
+
+function renderProfilePhoto(){
+    if(!profileAvatar) return;
+    const foto = getProfilePhoto();
+    if(foto){
+        profileAvatar.innerHTML = `<img src="${foto}" alt="Foto de perfil">`;
+        if(removeProfilePhotoBtn) removeProfilePhotoBtn.hidden = false;
+    }else{
+        const nome = (localStorage.getItem("poly_profile_name") || "Meu perfil").trim();
+        const iniciais = nome.split(/\s+/).filter(Boolean).slice(0,2).map(p => p[0]).join("").toUpperCase() || "EU";
+        profileAvatar.textContent = iniciais;
+        if(removeProfilePhotoBtn) removeProfilePhotoBtn.hidden = true;
+    }
+}
+
+function prepararFotoPerfil(file){
+    if(!file || !file.type.startsWith("image/")) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+            const tamanho = 500;
+            const escala = Math.min(1, tamanho / Math.max(img.naturalWidth, img.naturalHeight));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(img.naturalWidth * escala));
+            canvas.height = Math.max(1, Math.round(img.naturalHeight * escala));
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const foto = canvas.toDataURL("image/jpeg", .82);
+            try{
+                localStorage.setItem("poly_profile_photo", foto);
+                renderProfilePhoto();
+                showToast("Foto de perfil atualizada.");
+            }catch(e){
+                showToast("Não foi possível salvar esta foto. Tente uma imagem menor.");
+            }
+        };
+        img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function renderMeuEspaco(){
+    const name = getProfileName();
+    profileNameDisplay.textContent = name || "Meu perfil";
+    profileNameInput.value = name;
+    renderProfilePhoto();
+
+    const lista = getMinhaLista();
+    const continuar = getContinueWatching();
+    const historico = getProfileHistory();
+    const explorados = new Set([...lista,...continuar,...historico].map(i => `${getTipo(i)}:${i.id}`));
+
+    profileListCount.textContent = lista.length;
+    profileContinueCount.textContent = continuar.length;
+    profileHistoryCount.textContent = historico.length;
+    profileExploredCount.textContent = explorados.size;
+    renderProfileHistory();
+    renderProfileRatings();
+}
+
+function abrirMeuEspaco(){
+    currentPage = "profile";
+    homeContent.classList.add("hidden");
+    searchPage.classList.add("hidden");
+    profilePage.classList.add("hidden");
+    detailsPage.classList.add("hidden");
+    categoryPage.classList.add("hidden");
+    profilePage.classList.remove("hidden");
+    renderMeuEspaco();
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* =========================
    TROCA DE TELAS
 ========================= */
 function mostrarHome(){
     currentPage = "home";
     homeContent.classList.remove("hidden");
     searchPage.classList.add("hidden");
+    profilePage.classList.add("hidden");
     detailsPage.classList.add("hidden");
     categoryPage.classList.add("hidden");
     window.scrollTo({ top:0, behavior:"smooth" });
@@ -1958,6 +2486,7 @@ function mostrarHome(){
 function abrirTelaBusca(){
     currentPage = "search";
     homeContent.classList.add("hidden");
+    profilePage.classList.add("hidden");
     detailsPage.classList.add("hidden");
     categoryPage.classList.add("hidden");
     searchPage.classList.remove("hidden");
@@ -1968,6 +2497,7 @@ function abrirTelaCategoria(){
     currentPage = "category";
     homeContent.classList.add("hidden");
     searchPage.classList.add("hidden");
+    profilePage.classList.add("hidden");
     detailsPage.classList.add("hidden");
     categoryPage.classList.remove("hidden");
     window.scrollTo({ top:0, behavior:"smooth" });
@@ -1986,6 +2516,7 @@ function voltarDaTelaDetalhes(){
         currentPage = "search";
         homeContent.classList.add("hidden");
         searchPage.classList.remove("hidden");
+        profilePage.classList.add("hidden");
         categoryPage.classList.add("hidden");
         window.scrollTo({ top:0, behavior:"smooth" });
         return;
@@ -1995,6 +2526,7 @@ function voltarDaTelaDetalhes(){
         currentPage = "category";
         homeContent.classList.add("hidden");
         searchPage.classList.add("hidden");
+        profilePage.classList.add("hidden");
         categoryPage.classList.remove("hidden");
         window.scrollTo({ top:0, behavior:"smooth" });
         return;
@@ -2008,28 +2540,23 @@ function voltarDaTelaDetalhes(){
 ========================= */
 function abrirConteudo(item){
     if(!item) return;
-
     item = normalizarItem(item);
-
     const tipo = getTipo(item);
     const titulo = getTitulo(item);
-
-    modalTitle.textContent = titulo;
-
-    if(tipo === "tv"){
+    if(tipo === "tv" && item.season && item.episode){
+        modalTitle.textContent = `${titulo} • T${item.season}E${item.episode}`;
+        movieFrame.src = `https://myembed.biz/serie/${item.id}/${item.season}/${item.episode}`;
+        salvarContinuarAssistindo(item,{season:item.season,episode:item.episode,watchedLabel:`Continuar T${item.season}E${item.episode}`});
+    }else if(tipo === "tv"){
+        modalTitle.textContent = titulo;
         movieFrame.src = `https://myembed.biz/serie/${item.id}`;
-
-        salvarContinuarAssistindo(item, {
-            watchedLabel: "Continuar série"
-        });
+        salvarContinuarAssistindo(item,{watchedLabel:"Continuar série"});
     }else{
+        modalTitle.textContent = titulo;
         movieFrame.src = `https://myembed.biz/filme/${item.id}`;
-
-        salvarContinuarAssistindo(item, {
-            watchedLabel: "Continuar filme"
-        });
+        salvarContinuarAssistindo(item,{watchedLabel:"Continuar filme"});
     }
-
+    registrarHistorico(item);
     player.classList.add("active");
 }
 
@@ -2190,6 +2717,8 @@ function renderMinhaLista(){
     if(currentPage === "category" && currentCategory === "mylist"){
         renderMinhaListaCategoria();
     }
+
+    if(currentPage === "profile") renderMeuEspaco();
 }
 
 /* =========================
@@ -2201,6 +2730,7 @@ function getContinueWatching(){
 
 function saveContinueWatching(list){
     localStorage.setItem("poly_continue_watching", JSON.stringify(list));
+    if(currentPage === "profile") renderMeuEspaco();
 }
 
 function salvarContinuarAssistindo(item, extra = {}){
@@ -2896,6 +3426,7 @@ async function carregarRecomendacoes(item){
 
 async function abrirDetalhes(item){
     item = normalizarItem(item);
+    registrarHistorico(item);
     currentDetailsItem = item;
 
     // guarda de qual tela veio ANTES de abrir detalhes
@@ -2905,6 +3436,7 @@ async function abrirDetalhes(item){
     currentPage = "details";
     homeContent.classList.add("hidden");
     searchPage.classList.add("hidden");
+    profilePage.classList.add("hidden");
     categoryPage.classList.add("hidden");
     detailsPage.classList.remove("hidden");
     window.scrollTo({ top:0, behavior:"smooth" });
@@ -2931,6 +3463,8 @@ async function abrirDetalhes(item){
         <span class="badge">${ano}</span>
         <span class="badge">⭐ ${nota}</span>
     `;
+
+    renderDetailsRating(item);
 
     if(getTipo(item) === "tv"){
         detailsLeftTitle.textContent = "Episódios";
@@ -3242,13 +3776,13 @@ function getCategoryConfig(category){
             case "animes":
     return {
         title: "Animes",
-        subtitle: "Animes japoneses para maratonar",
+        subtitle: "Animes para maratonar",
         endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_genres=16&with_origin_country=JP&sort_by=popularity.desc&page=`
     };
 
     case "romance":
     return {
-        title: "Romance",
+        title: "Romances",
         subtitle: "Filmes e séries de romance",
         movieEndpoint: `${TMDB_URL}/discover/movie?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10749&sort_by=popularity.desc&page=`,
         tvEndpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_genres=10749&sort_by=popularity.desc&page=`
@@ -3264,14 +3798,14 @@ case "action":
 
     case "dorama":
     return {
-        title: "Dorama",
+        title: "Doramas",
         subtitle: "Doramas para assistir",
         endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_origin_country=KR&sort_by=popularity.desc&page=`
     };
 
     case "turkish":
     return {
-        title: "Novela Turca",
+        title: "Novelas Turcas",
         subtitle: "Novelas turcas para assistir",
         endpoint: `${TMDB_URL}/discover/tv?api_key=${TMDB_KEY}&language=pt-BR&with_origin_country=TR&sort_by=popularity.desc&page=`
     };
@@ -3545,7 +4079,62 @@ function renderMinhaListaCategoria(){
 backHomeBtn.addEventListener("click", voltarParaHome);
 backFromDetailsBtn.addEventListener("click", voltarDaTelaDetalhes);
 backCategoryBtn.addEventListener("click", mostrarHome);
+backProfileBtn.addEventListener("click", mostrarHome);
 logoBtn.addEventListener("click", mostrarHome);
+
+saveProfileBtn.addEventListener("click", () => {
+    const name = profileNameInput.value.trim();
+
+    if(name){
+        localStorage.setItem("poly_profile_name", name);
+        showToast("Perfil salvo.");
+    }else{
+        localStorage.removeItem("poly_profile_name");
+        showToast("Nome do perfil removido.");
+    }
+
+    renderMeuEspaco();
+});
+
+profilePhotoBtn.addEventListener("click", () => profilePhotoInput.click());
+profileAvatar.addEventListener("click", () => profilePhotoInput.click());
+profileAvatar.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); profilePhotoInput.click(); }
+});
+profilePhotoInput.addEventListener("change", (e) => {
+    const file = e.target.files && e.target.files[0];
+    prepararFotoPerfil(file);
+    e.target.value = "";
+});
+removeProfilePhotoBtn.addEventListener("click", () => {
+    localStorage.removeItem("poly_profile_photo");
+    renderProfilePhoto();
+    showToast("Foto de perfil removida.");
+});
+
+profileNameInput.addEventListener("keydown", (e) => {
+    if(e.key === "Enter") saveProfileBtn.click();
+});
+
+profileListBtn.addEventListener("click", () => abrirCategoria("mylist"));
+profileContinueBtn.addEventListener("click", () => abrirCategoria("continue"));
+
+clearHistoryBtn.addEventListener("click", () => {
+    if(!getProfileHistory().length){ showToast("O histórico já está vazio."); return; }
+    localStorage.removeItem("poly_history");
+    renderMeuEspaco();
+    showToast("Histórico limpo.");
+});
+
+profileRandomBtn.addEventListener("click", () => {
+    const lista = getMinhaLista();
+    if(!lista.length){
+        showToast("Adicione títulos à Minha Lista primeiro.");
+        return;
+    }
+    const item = lista[Math.floor(Math.random() * lista.length)];
+    abrirDetalhes(item);
+});
 
 /* =========================
    MENU MOBILE
@@ -3594,6 +4183,11 @@ document.querySelectorAll(".menu-link").forEach(link => {
 
         if(page === "home"){
             mostrarHome();
+            return;
+        }
+
+        if(page === "profile"){
+            abrirMeuEspaco();
             return;
         }
 
