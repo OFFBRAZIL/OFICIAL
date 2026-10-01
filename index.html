@@ -84,10 +84,25 @@ nav{
     gap:18px;
 
     flex:1;
-    justify-content:center;
-
     min-width:0;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    white-space:nowrap;
+
+    scrollbar-width:none;
 }
+
+.menu::-webkit-scrollbar{
+    display:none;
+}
+
+.menu .menu-link{
+    flex-shrink:0;
+    white-space:nowrap;
+}
+
 .menu a{
     color:#fff;
     text-decoration:none;
@@ -1319,46 +1334,10 @@ nav{
     background:rgba(255,255,255,.12);
 }
 
-
-/* ===== ENTRADA DOS ITENS ===== */
+/* ===== ENTRADA DO MENU ===== */
 
 .mobile-menu.open .menu-link{
-    animation:
-        mobileMenuItem
-        .25s
-        ease-out
-        both;
-}
-.mobile-menu.open .menu-link:nth-child(1){
-    animation-delay:.02s;
-}
-
-.mobile-menu.open .menu-link:nth-child(2){
-    animation-delay:.06s;
-}
-
-.mobile-menu.open .menu-link:nth-child(3){
-    animation-delay:.10s;
-}
-
-.mobile-menu.open .menu-link:nth-child(4){
-    animation-delay:.14s;
-}
-
-.mobile-menu.open .menu-link:nth-child(5){
-    animation-delay:.18s;
-}
-
-@keyframes mobileMenuItem{
-    from{
-        opacity:0;
-        transform:translateY(-4px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    animation:none;
 }
 
 /* ===== BUSCA MOBILE ===== */
