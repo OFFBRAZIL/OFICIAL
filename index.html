@@ -63,9 +63,10 @@ nav{
     margin:0 auto;
     min-height:74px;
     padding:12px 24px;
+
     display:flex;
     align-items:center;
-    justify-content:space-between;
+
     gap:20px;
 }
 
@@ -80,9 +81,13 @@ nav{
 .menu{
     display:flex;
     align-items:center;
-    gap:22px;
-}
+    gap:18px;
 
+    flex:1;
+    justify-content:center;
+
+    min-width:0;
+}
 .menu a{
     color:#fff;
     text-decoration:none;
@@ -109,7 +114,8 @@ nav{
     border:1px solid var(--line);
     border-radius:999px;
     padding:10px 14px;
-    min-width:250px;
+    min-width:220px;
+    flex-shrink:0;
     transition:.25s;
 }
 
@@ -1034,17 +1040,17 @@ nav{
             rgba(7,7,9,.99) 100%
         );
 
-    backdrop-filter:blur(24px);
-    -webkit-backdrop-filter:blur(24px);
+        backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
 
     border-top:1px solid rgba(255,255,255,.05);
 
     box-shadow:0 20px 45px rgba(0,0,0,.45);
 
     transition:
-        max-height .4s cubic-bezier(.22,1,.36,1),
-        opacity .25s ease,
-        padding .4s cubic-bezier(.22,1,.36,1);
+    max-height .32s ease,
+    opacity .2s ease,
+    padding .32s ease;
 }
 
 .mobile-menu.open{
@@ -1059,6 +1065,23 @@ nav{
     padding-bottom:18px;
 
     border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.mobile-menu.open::-webkit-scrollbar{
+    width:4px;
+}
+
+.mobile-menu.open::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.mobile-menu.open::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.22);
+    border-radius:10px;
+}
+
+.mobile-menu.open::-webkit-scrollbar-thumb:hover{
+    background:rgba(255,255,255,.38);
 }
 
 .mobile-menu.open::-webkit-scrollbar{
@@ -1302,11 +1325,10 @@ nav{
 .mobile-menu.open .menu-link{
     animation:
         mobileMenuItem
-        .4s
-        cubic-bezier(.22,1,.36,1)
+        .25s
+        ease-out
         both;
 }
-
 .mobile-menu.open .menu-link:nth-child(1){
     animation-delay:.02s;
 }
@@ -1330,7 +1352,7 @@ nav{
 @keyframes mobileMenuItem{
     from{
         opacity:0;
-        transform:translateY(-8px);
+        transform:translateY(-4px);
     }
 
     to{
