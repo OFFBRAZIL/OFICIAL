@@ -33,7 +33,7 @@
 }
 
 html{
-    scroll-behavior:smooth;
+    scroll-behavior:auto;
 }
 
 body{
@@ -54,7 +54,6 @@ nav{
     width:100%;
     z-index:999;
     background:linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.45));
-    backdrop-filter:blur(18px);
     border-bottom:1px solid var(--line);
 }
 
@@ -203,7 +202,6 @@ nav{
     margin-bottom:20px;
     font-size:14px;
     color:#fff;
-    backdrop-filter:blur(10px);
 }
 
 .hero h1{
@@ -395,9 +393,13 @@ nav{
     border-radius:50%;
     background:rgba(0,0,0,.45);
     color:#fff;
-    backdrop-filter:blur(10px);
     cursor:pointer;
     font-size:16px;
+    line-height:1;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     transition:.25s;
     border:1px solid rgba(255,255,255,.08);
 }
@@ -496,7 +498,7 @@ nav{
     border-radius:20px;
     cursor:pointer;
     font-size:14px;
-    transition:.2s ease;
+    transition:none;
 }
 
 .type-filter:hover{
@@ -966,6 +968,96 @@ nav{
     }
 }
 
+
+/* ===== MENU DE CATEGORIAS — PC ===== */
+@media (min-width:1001px){
+    .nav-inner{position:relative;}
+
+    .desktop-navigation{
+        display:flex; align-items:center; gap:22px;
+        position:absolute; left:50%; transform:translateX(-50%);
+        flex:none; min-width:0;
+    }
+
+    .right-tools{
+        margin-left:auto;
+    }
+
+    .desktop-nav-link{
+        color:#fff; text-decoration:none; opacity:.82; font-size:15px;
+        font-weight:500; white-space:nowrap; transition:opacity .18s ease;
+    }
+    .desktop-nav-link:hover{opacity:1;}
+
+    .desktop-categories-wrap{position:relative;}
+
+    .desktop-categories-btn{
+        display:flex; align-items:center; gap:5px; padding:0;
+        color:#fff; font:inherit; font-size:15px; font-weight:500;
+        background:transparent; border:0; border-radius:0;
+        opacity:.82; cursor:pointer; white-space:nowrap;
+        transition:opacity .18s ease;
+    }
+    .desktop-categories-btn:hover,
+    .desktop-categories-btn[aria-expanded="true"]{
+        opacity:1;
+    }
+    .desktop-categories-arrow{
+        font-size:16px; line-height:1; opacity:.65;
+        transform:translateY(-1px);
+    }
+
+    .desktop-categories-panel{
+        position:absolute; top:calc(100% + 10px); left:50%; width:430px;
+        padding:18px; transform:translate(-50%,0);
+        background:rgba(13,13,16,.98); border:1px solid rgba(255,255,255,.10);
+        border-radius:16px; box-shadow:0 18px 40px rgba(0,0,0,.42);
+        opacity:0; visibility:hidden; pointer-events:none;
+        transition:opacity .12s ease,visibility 0s linear .12s;
+    }
+    .desktop-categories-panel.open{
+        opacity:1; visibility:visible; pointer-events:auto;
+        transition:opacity .12s ease,visibility 0s linear 0s;
+    }
+
+    /* Os elementos internos ficam estáticos: apenas o painel faz um fade leve. */
+    .desktop-categories-panel .desktop-category-title,
+    .desktop-categories-panel .desktop-category-divider,
+    .desktop-categories-panel .desktop-category-item{
+        opacity:1; transform:none;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+        .desktop-categories-panel,
+        .desktop-categories-panel .desktop-category-title,
+        .desktop-categories-panel .desktop-category-divider,
+        .desktop-categories-panel .desktop-category-item{
+            transition:none !important; animation:none !important;
+        }
+        .desktop-categories-panel.open .desktop-category-title,
+        .desktop-categories-panel.open .desktop-category-divider,
+        .desktop-categories-panel.open .desktop-category-item{
+            opacity:1; transform:none;
+        }
+    }
+    .desktop-category-title{
+        margin-bottom:9px; color:rgba(255,255,255,.42); font-size:10px;
+        font-weight:800; letter-spacing:1.4px;
+    }
+    .desktop-category-grid{display:grid; grid-template-columns:1fr 1fr; gap:7px;}
+    .desktop-category-item{
+        display:flex; align-items:center; min-height:42px; padding:0 12px;
+        color:rgba(255,255,255,.82); text-decoration:none; font-size:14px;
+        border-radius:9px; background:rgba(255,255,255,.035); border:1px solid transparent;
+        transition:background .14s ease,color .14s ease,border-color .14s ease;
+    }
+    .desktop-category-item:hover{
+        color:#fff; background:rgba(255,255,255,.085); border-color:rgba(255,255,255,.08);
+    }
+    .desktop-category-divider{height:1px; margin:16px 0; background:rgba(255,255,255,.07);}
+}
+
+@media(max-width:1000px){
 /* ===== CABEÇALHO MOBILE ===== */
 
 .nav-inner{
@@ -982,6 +1074,10 @@ nav{
 
 /* Esconde o menu do computador */
 .menu{
+    display:none;
+}
+
+.desktop-navigation{
     display:none;
 }
 
@@ -1055,17 +1151,12 @@ nav{
             rgba(7,7,9,.99) 100%
         );
 
-        backdrop-filter:blur(14px);
--webkit-backdrop-filter:blur(14px);
-
+        /* Abertura leve: sem blur pesado e sem animação de altura lenta */
     border-top:1px solid rgba(255,255,255,.05);
 
-    box-shadow:0 20px 45px rgba(0,0,0,.45);
+    box-shadow:0 12px 28px rgba(0,0,0,.32);
 
-    transition:
-    max-height .32s ease,
-    opacity .2s ease,
-    padding .32s ease;
+    transition:opacity .12s ease;
 }
 
 .mobile-menu.open{
@@ -1149,12 +1240,7 @@ nav{
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,.025);
 
-    transition:
-        background .2s ease,
-        color .2s ease,
-        border-color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
+    transition:none;
 }
 
 
@@ -1182,7 +1268,7 @@ nav{
 
     border-radius:9px;
 
-    transition:.2s ease;
+    transition:none;
 }
 
 
@@ -1258,9 +1344,7 @@ nav{
 
     color:rgba(255,255,255,.20);
 
-    transition:
-        color .2s ease,
-        transform .2s ease;
+    transition:none;
 }
 
 
@@ -1297,39 +1381,41 @@ nav{
 
 /* ===== HOVER ===== */
 
-.mobile-menu .menu-link:hover{
-    color:#fff;
+@media (hover:hover) and (pointer:fine){
+    .mobile-menu .menu-link:hover{
+        color:#fff;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.11),
-            rgba(255,255,255,.04)
-        );
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,255,255,.11),
+                rgba(255,255,255,.04)
+            );
 
-    border-color:rgba(255,255,255,.12);
+        border-color:rgba(255,255,255,.12);
 
-    transform:translateY(-1px);
+        transform:none;
 
-    box-shadow:
-        0 8px 22px rgba(0,0,0,.2);
-}
+        box-shadow:
+            0 8px 22px rgba(0,0,0,.2);
+    }
 
-.mobile-menu .menu-link:hover::before{
-    background:rgba(255,255,255,.10);
-    color:#fff;
-}
+    .mobile-menu .menu-link:hover::before{
+        background:rgba(255,255,255,.10);
+        color:#fff;
+    }
 
-.mobile-menu .menu-link:hover::after{
-    color:rgba(255,255,255,.65);
-    transform:translateX(3px);
+    .mobile-menu .menu-link:hover::after{
+        color:rgba(255,255,255,.65);
+        transform:none;
+    }
 }
 
 
 /* ===== TOQUE ===== */
 
 .mobile-menu .menu-link:active{
-    transform:scale(.97);
+    transform:none;
 
     background:rgba(255,255,255,.12);
 }
@@ -1338,6 +1424,25 @@ nav{
 
 .mobile-menu.open .menu-link{
     animation:none;
+}
+
+/* Em telas de toque, evita o efeito de "hover" preso após o toque. */
+@media (hover:none) and (pointer:coarse){
+    .mobile-menu .menu-link:hover{
+        transform:none;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .mobile-menu,
+    .mobile-menu .menu-link,
+    .mobile-menu .menu-link::before,
+    .mobile-menu .menu-link::after,
+    .mobile-menu-btn span{
+        transition:none !important;
+        animation:none !important;
+    }
 }
 
 /* ===== BUSCA MOBILE ===== */
@@ -1422,6 +1527,8 @@ nav{
     font-size:52px;
 }
 
+}
+
 </style>
 </head>
 <body>
@@ -1440,18 +1547,38 @@ nav{
             <!-- LOGO -->
             <div class="logo" id="logoBtn">POLY TV+</div>
     
-            <!-- MENU DESKTOP -->
-            <div class="menu">
-                <a href="#" class="menu-link" data-page="home">Início</a>
-                <a href="#" class="menu-link" data-category="movies">Filmes</a>
-                <a href="#" class="menu-link" data-category="series">Séries</a>
-                <a href="#" class="menu-link" data-category="animations">Animações</a>
-                <a href="#" class="menu-link" data-category="animes">Animes</a>
-                <a href="#" class="menu-link" data-category="romance">Romance</a>
-                <a href="#" class="menu-link" data-category="action">Ação</a>
-                <a href="#" class="menu-link" data-category="dorama">Dorama</a>
-                <a href="#" class="menu-link" data-category="turkish">Novela Turca</a>
-                <a href="#" class="menu-link" data-category="mylist">Minha Lista</a>
+            <!-- MENU DESKTOP / CATEGORIAS -->
+            <div class="desktop-navigation">
+                <a href="#" class="desktop-nav-link menu-link" data-page="home">Início</a>
+
+                <div class="desktop-categories-wrap" id="desktopCategoriesWrap">
+                    <button class="desktop-categories-btn" id="desktopCategoriesBtn" type="button" aria-expanded="false">
+                        <span>Categorias</span>
+                        
+                    </button>
+
+                    <div class="desktop-categories-panel" id="desktopCategoriesPanel">
+                        <div class="desktop-category-title">EXPLORAR</div>
+                        <div class="desktop-category-grid">
+                            <a href="#" class="desktop-category-item menu-link" data-category="movies">Filmes</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="series">Séries</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="animations">Animações</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="animes">Animes</a>
+                        </div>
+
+                        <div class="desktop-category-divider"></div>
+
+                        <div class="desktop-category-title">GÊNEROS</div>
+                        <div class="desktop-category-grid">
+                            <a href="#" class="desktop-category-item menu-link" data-category="romance">Romance</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="action">Ação</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="dorama">Dorama</a>
+                            <a href="#" class="desktop-category-item menu-link" data-category="turkish">Novela Turca</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="desktop-nav-link menu-link" data-category="mylist">Minha Lista</a>
             </div>
     
             <!-- PESQUISA -->
@@ -1687,8 +1814,8 @@ nav{
 ========================= */
 const TMDB_KEY = "ead2df33a9f69aa41137a4aa80ddaee4"; 
 const TMDB_URL = "https://api.themoviedb.org/3";
-const IMG_W780 = "https://image.tmdb.org/t/p/w780";
-const IMG_ORIGINAL = "https://image.tmdb.org/t/p/original";
+const IMG_W780 = "https://image.tmdb.org/t/p/w500";
+const IMG_ORIGINAL = "https://image.tmdb.org/t/p/w1280";
 
 /* =========================
    ELEMENTOS
@@ -2143,7 +2270,7 @@ function criarCardContinuar(item){
     const label = getContinueLabel(item);
 
     card.innerHTML = `
-        <img src="${IMG_W780}${imagePath}" alt="${titulo}">
+        <img src="${IMG_W780}${imagePath}" alt="${titulo}" loading="lazy" decoding="async">
         <div class="card-overlay"></div>
 
         <div class="card-actions">
@@ -2298,7 +2425,7 @@ function criarCard(item, onClick, options = {}){
 
     card.innerHTML = `
         ${options.top10 ? `<div class="top10-number">${options.rank}</div>` : ""}
-        <img src="${IMG_W780}${imagePath}" alt="${titulo}">
+        <img src="${IMG_W780}${imagePath}" alt="${titulo}" loading="lazy" decoding="async">
         <div class="card-overlay"></div>
 
         <div class="card-actions">
@@ -2360,7 +2487,7 @@ function criarSearchCard(item){
     const inList = estaNaLista(item);
 
     card.innerHTML = `
-        <img src="${IMG_W780}${imagePath}" alt="${titulo}">
+        <img src="${IMG_W780}${imagePath}" alt="${titulo}" loading="lazy" decoding="async">
         <div class="search-card-body">
             <div class="search-card-title">${titulo}</div>
 
@@ -2448,6 +2575,25 @@ function toggleEpisodeWatched(seriesId, seasonNumber, episodeNumber){
 
     map[key] = watched;
     saveWatchedEpisodesMap(map);
+}
+
+function marcarEpisodeWatched(seriesId, seasonNumber, episodeNumber){
+    const map = getWatchedEpisodesMap();
+    const key = getSeriesStorageKey(seriesId);
+    const watched = map[key] || [];
+
+    const jaMarcado = watched.some(ep =>
+        ep.season === seasonNumber && ep.episode === episodeNumber
+    );
+
+    if(!jaMarcado){
+        watched.push({
+            season: seasonNumber,
+            episode: episodeNumber
+        });
+        map[key] = watched;
+        saveWatchedEpisodesMap(map);
+    }
 }
 
 function updateEpisodesProgress(seriesId, seasonNumber, totalEpisodes){
@@ -2552,6 +2698,15 @@ async function carregarTemporadaDaSerie(seriesId, seasonNumber){
         const checkBtn = card.querySelector(".episode-check-btn");
 
         watchBtn.addEventListener("click", () => {
+    // Ao clicar em "Assistir", o episódio é marcado automaticamente.
+    // A opção manual continua disponível no botão ao lado.
+    marcarEpisodeWatched(seriesId, seasonNumber, ep.episode_number);
+
+    const watchedNow = isEpisodeWatched(seriesId, seasonNumber, ep.episode_number);
+    checkBtn.classList.toggle("active", watchedNow);
+    checkBtn.textContent = watchedNow ? "✓ Assistido" : "Marcar assistido";
+    updateEpisodesProgress(seriesId, seasonNumber, episodios.length);
+
     const itemBase = currentDetailsItem
         ? normalizarItem(currentDetailsItem)
         : {
@@ -3359,6 +3514,25 @@ logoBtn.addEventListener("click", mostrarHome);
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const mobileMenu = document.getElementById("mobileMenu");
 
+/* MENU DE CATEGORIAS — PC */
+const desktopCategoriesBtn = document.getElementById("desktopCategoriesBtn");
+const desktopCategoriesPanel = document.getElementById("desktopCategoriesPanel");
+
+if(desktopCategoriesBtn && desktopCategoriesPanel){
+    desktopCategoriesBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const aberto = desktopCategoriesPanel.classList.toggle("open");
+        desktopCategoriesBtn.setAttribute("aria-expanded", aberto ? "true" : "false");
+    });
+
+    document.addEventListener("click", (e) => {
+        if(!e.target.closest("#desktopCategoriesWrap")){
+            desktopCategoriesPanel.classList.remove("open");
+            desktopCategoriesBtn.setAttribute("aria-expanded", "false");
+        }
+    });
+}
+
 mobileMenuBtn.addEventListener("click", () => {
 
     mobileMenu.classList.toggle("open");
@@ -3373,8 +3547,10 @@ document.querySelectorAll(".menu-link").forEach(link => {
         const page = link.dataset.page;
         const category = link.dataset.category;
 
-        /* Fecha o menu mobile */
+        /* Fecha os menus */
         mobileMenu.classList.remove("open");
+        if(desktopCategoriesPanel) desktopCategoriesPanel.classList.remove("open");
+        if(desktopCategoriesBtn) desktopCategoriesBtn.setAttribute("aria-expanded", "false");
 
         if(page === "home"){
             mostrarHome();
