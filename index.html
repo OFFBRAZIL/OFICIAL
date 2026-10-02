@@ -662,71 +662,106 @@ nav{
 }
 
 /* ===== AVALIAÇÃO PESSOAL ===== */
+/* ===== AVALIAÇÃO PESSOAL ===== */
 .personal-rating{
     position:relative;
     margin:6px 0 0;
     padding:0;
-    width:auto;
+    width:max-content;
     max-width:100%;
-    display:flex;
-    align-items:center;
-    gap:8px;
+    height:38px;
+    display:block;
+    flex:0 0 auto;
 }
 .personal-rating-title{
+    position:relative;
+    z-index:2;
     margin-top:6px;
     border:1px solid rgba(255,255,255,.10);
     background:rgba(255,255,255,.045);
     color:#fff;
     border-radius:10px;
     padding:10px 14px;
+    min-width:82px;
+    height:38px;
+    box-sizing:border-box;
     font-size:12px;
     font-weight:800;
     cursor:pointer;
     white-space:nowrap;
-    transition:background .15s ease,border-color .15s ease;
+    opacity:1;
+    transform:translateX(0) scale(1);
+    transition:opacity .38s ease, transform .38s ease, background .18s ease,border-color .18s ease;
 }
 .personal-rating-title:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);}
 .personal-rating-stars{
+    position:absolute;
+    left:0;
+    top:6px;
+    z-index:3;
     display:flex;
     gap:2px;
     align-items:center;
     justify-content:center;
-    margin:8px 0 0;
+    margin:0;
     padding:4px 7px;
+    height:38px;
+    box-sizing:border-box;
     border-radius:10px;
     background:rgba(0,0,0,.22);
     border:1px solid rgba(255,255,255,.08);
     opacity:0;
     visibility:hidden;
-    transform:translateX(-12px) scale(.92);
+    transform:translateX(-8px) scale(.94);
     transform-origin:left center;
     pointer-events:none;
-    width:max-content;
-    max-width:0;
+    white-space:nowrap;
     overflow:hidden;
-    transition:opacity .45s ease,transform .45s ease,max-width .5s ease,visibility 0s linear .5s;
+    transition:opacity .38s ease,transform .38s ease,visibility 0s linear .38s;
+}
+.personal-rating.is-open .personal-rating-title{
+    opacity:0;
+    transform:translateX(8px) scale(.94);
+    pointer-events:none;
 }
 .personal-rating.is-open .personal-rating-stars{
     opacity:1;
     visibility:visible;
     transform:translateX(0) scale(1);
     pointer-events:auto;
-    max-width:200px;
-    transition:opacity .45s ease,transform .45s ease,max-width .5s ease;
+    transition:opacity .42s ease,transform .42s ease;
 }
 .personal-rating-star{
     border:0;background:transparent;color:rgba(255,255,255,.28);
     font-size:23px;line-height:1;padding:1px 2px;cursor:pointer;
-    transform:translateY(-2px);
-    transition:color .15s ease,transform .15s ease;
+    transform:translateY(-1px);
+    transition:color .22s ease,transform .22s ease;
 }
 .personal-rating-star:hover,.personal-rating-star.active{color:#ffd54a;}
 .personal-rating-star:hover{transform:scale(1.08);}
 .personal-rating-note{display:none;}
 @media(max-width:700px){
-    .personal-rating{width:auto;}
-    .personal-rating-title{padding:10px 12px;}
+    .details-actions{
+        align-items:center;
+        flex-wrap:wrap;
+    }
+    .details-actions .personal-rating{
+        width:max-content;
+        height:38px;
+        flex:0 0 auto;
+        overflow:visible;
+    }
+    .details-actions .personal-rating-title{
+        padding:10px 12px;
+    }
+    .details-actions .personal-rating-stars{
+        max-width:calc(100vw - 32px);
+    }
+    .details-actions .personal-rating-star{
+        font-size:24px;
+    }
 }
+
 .profile-ratings{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;}
 .profile-rating-card{display:flex;gap:12px;align-items:center;padding:10px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.025);cursor:pointer;}
 .profile-rating-card img{width:54px;height:78px;border-radius:8px;object-fit:cover;flex-shrink:0;}
@@ -738,9 +773,35 @@ nav{
 
 /* Ajuste mobile: mantém Avaliar ao lado de Minha Lista, sem alterar o botão ou as estrelas. */
 @media(max-width:700px){
+    /* Mantém Avaliar fixo ao lado de Minha Lista. As estrelas não participam
+       do cálculo do flex, evitando que a linha seja empurrada para baixo. */
     .details-actions .personal-rating{
+        position:relative;
         width:auto;
         flex:0 0 auto;
+        max-width:none;
+        overflow:visible;
+        align-self:flex-end;
+    }
+
+    .details-actions .personal-rating-title{
+        margin-top:0;
+    }
+
+    .details-actions .personal-rating.is-open{
+        flex:0 0 auto;
+        max-width:none;
+    }
+
+    .details-actions .personal-rating .personal-rating-stars{
+        position:absolute;
+        left:0;
+        top:0;
+        box-sizing:border-box;
+        margin:0;
+        max-width:220px;
+        white-space:nowrap;
+        z-index:20;
     }
 }
 
